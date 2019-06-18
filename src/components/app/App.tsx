@@ -6,10 +6,8 @@ const App: React.FC = () => {
   const spotify = new Spotify();
 
   useEffect(() => {
-    if(!spotify.isAuthenticated()) {
+    if(!spotify.isAuthenticated())
       spotify.authenticateUser()
-    }
-    console.log('test')
   })
 
   return (
