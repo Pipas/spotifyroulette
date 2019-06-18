@@ -29,8 +29,10 @@ export class Spotify {
       this.client.setAccessToken(access_token)
       this.auth = true
     }
+  }
 
-    return !!access_token
+  searchTrack(query: string): Promise<SpotifyApi.TrackSearchResponse> {
+    return this.client.searchTracks(query)
   }
 
   isAuthenticated() {

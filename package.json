@@ -1,6 +1,7 @@
 {
   "name": "spotify-roulette",
   "version": "0.1.0",
+  "homepage" : "http://pipas.github.io/SpotifyRoulette",
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.15",
