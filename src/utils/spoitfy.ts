@@ -17,8 +17,7 @@ export class Spotify {
 
     const authEndpoint = 'https://accounts.spotify.com/authorize'
     const clientId = '41e10dc3f3594667b190b3681fdee8ca'
-    // const redirectUri = 'http://localhost:1234'
-    const redirectUri = 'https://pipas.github.io/SpotifyRoulette/'
+    const redirectUri = process.env.NODE_ENV === 'production' ? 'https://pipas.github.io/SpotifyRoulette/' : 'http://192.168.1.10:3000/'
     const scopes = [
       'user-top-read'
     ];
@@ -32,13 +31,6 @@ export class Spotify {
     }
 
     return !!access_token
-  }
-
-  getAlbums() {
-    this.client.getMyTopArtists().then(data => {
-      const h1: HTMLHeadingElement = <HTMLHeadingElement> document.getElementById("title")
-      h1.innerHTML = data.items[0].name
-    })
   }
 
   isAuthenticated() {
