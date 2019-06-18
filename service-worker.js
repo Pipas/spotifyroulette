@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/SpotifyRoulette/precache-manifest.6a2bdd03ec5bf3c9f9d6302e3fab3be6.js"
+  "/SpotifyRoulette/precache-manifest.7144e910ea11b6fd5c56062ddc8d5f77.js"
 );
 
 self.addEventListener('message', (event) => {

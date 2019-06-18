@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/SpotifyRoulette/static/css/main.894e9240.chunk.css",
-    "main.js": "/SpotifyRoulette/static/js/main.f3b54549.chunk.js",
-    "main.js.map": "/SpotifyRoulette/static/js/main.f3b54549.chunk.js.map",
+    "main.css": "/SpotifyRoulette/static/css/main.38100140.chunk.css",
+    "main.js": "/SpotifyRoulette/static/js/main.b08ab0ee.chunk.js",
+    "main.js.map": "/SpotifyRoulette/static/js/main.b08ab0ee.chunk.js.map",
     "runtime~main.js": "/SpotifyRoulette/static/js/runtime~main.f1a859b2.js",
     "runtime~main.js.map": "/SpotifyRoulette/static/js/runtime~main.f1a859b2.js.map",
-    "static/js/2.f39765c4.chunk.js": "/SpotifyRoulette/static/js/2.f39765c4.chunk.js",
-    "static/js/2.f39765c4.chunk.js.map": "/SpotifyRoulette/static/js/2.f39765c4.chunk.js.map",
+    "static/js/2.663d1216.chunk.js": "/SpotifyRoulette/static/js/2.663d1216.chunk.js",
+    "static/js/2.663d1216.chunk.js.map": "/SpotifyRoulette/static/js/2.663d1216.chunk.js.map",
     "index.html": "/SpotifyRoulette/index.html",
-    "precache-manifest.6a2bdd03ec5bf3c9f9d6302e3fab3be6.js": "/SpotifyRoulette/precache-manifest.6a2bdd03ec5bf3c9f9d6302e3fab3be6.js",
+    "precache-manifest.7144e910ea11b6fd5c56062ddc8d5f77.js": "/SpotifyRoulette/precache-manifest.7144e910ea11b6fd5c56062ddc8d5f77.js",
     "service-worker.js": "/SpotifyRoulette/service-worker.js",
-    "static/css/main.894e9240.chunk.css.map": "/SpotifyRoulette/static/css/main.894e9240.chunk.css.map"
+    "static/css/main.38100140.chunk.css.map": "/SpotifyRoulette/static/css/main.38100140.chunk.css.map"
   }
 }
