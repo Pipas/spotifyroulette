@@ -17,7 +17,7 @@ export class Spotify {
 
     const authEndpoint = 'https://accounts.spotify.com/authorize'
     const clientId = '41e10dc3f3594667b190b3681fdee8ca'
-    const redirectUri = process.env.NODE_ENV === 'production' ? 'https://pipas.github.io/SpotifyRoulette/' : 'http://192.168.1.10:3000/'
+    const redirectUri = process.env.NODE_ENV === 'production' ? 'https://spotifyroulette.paulocorreia.me/' : 'http://192.168.1.10:3000/'
     const scopes = [
       'user-top-read'
     ];
