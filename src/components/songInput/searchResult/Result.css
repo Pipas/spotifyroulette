@@ -1,0 +1,40 @@
+.input .result {
+  display: flex;
+  height: 56px;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 8px 16px;
+  margin: 8px 0;
+}
+
+.input .result:hover {
+  background-color: #0000001a;
+  cursor: pointer;
+}
+
+.input .result .cover {
+  height: 40px;
+  width: 40px;
+  border-radius: 4px;
+}
+
+.input .result .info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  font-family: 'Cabin', sans-serif;
+  color: #8d8d8d;
+  border-radius: 16px;
+  margin-left: 16px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.input .result .info .title {
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 4px;
+}

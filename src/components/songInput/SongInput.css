@@ -1,0 +1,69 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  margin: 32px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 16px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.32);
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.input input {
+  font-family: 'Cabin', sans-serif;
+  color: #8d8d8d;
+  height: 56px;
+  width: 392px;
+  border: none;
+  background-color: #0000001a;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 20px;
+  outline-width: 0;
+  box-sizing: border-box;
+}
+
+.input button {
+  height: 24px;
+  width: 24px;
+  margin-left: 16px;
+  border: none;
+  background-color: transparent;
+  outline-width: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill: #8d8d8d;
+}
+
+.input button:hover {
+  cursor: pointer;
+}
+
+.input button:active {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.32);
+  transform: translateY(2px);
+}
+
+.input button svg {
+  padding-left: 4px;
+  fill: #1db954;
+}
+
+.input .tooltip {
+  font-family: 'Cabin', sans-serif;
+  color: #8d8d8d;
+  width: 100%;
+  border-radius: 16px;
+  padding: 64px 16px;
+  font-size: 16px;
+  text-align: center;
+  box-sizing: border-box;
+}
