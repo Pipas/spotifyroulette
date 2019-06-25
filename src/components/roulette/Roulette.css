@@ -9,14 +9,14 @@
   width: 100vh;
 }
 
-.roulette:hover {
+.roulette.load {
   animation: 
     rotate1 1s 0.5s ease-in-out forwards,
     rotate2 1s 2s ease-in-out forwards, 
     rotate3 1s 3.5s ease-in-out forwards,
     rotate4 1s 5s ease-in-out forwards, 
     rotate5 1s 6.5s ease-in-out forwards,
-    spin 1.1s 8s cubic-bezier(0.39,-0.01, 0.58, 0.97) forwards;
+    spin 1.2s 8.5s cubic-bezier(0.39,-0.01, 0.58, 0.97) forwards;
 }
 
 .roulette img {
@@ -40,22 +40,22 @@
   border-radius: 11.3vh;
 }
 
-.roulette:hover .album:nth-child(1) img {
+.roulette.load .album:nth-child(1) img {
   animation: load 0.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
 }
-.roulette:hover .album:nth-child(2) img {
+.roulette.load .album:nth-child(2) img {
   animation: load 0.5s 1.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
 }
-.roulette:hover .album:nth-child(3) img {
+.roulette.load .album:nth-child(3) img {
   animation: load 0.5s 3s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
 }
-.roulette:hover .album:nth-child(4) img {
+.roulette.load .album:nth-child(4) img {
   animation: load 0.5s 4.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
 }
-.roulette:hover .album:nth-child(5) img {
+.roulette.load .album:nth-child(5) img {
   animation: load 0.5s 6s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
 }
-.roulette:hover .album:nth-child(6) img {
+.roulette.load .album:nth-child(6) img {
   animation: load 0.5s 7.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
 }
 
