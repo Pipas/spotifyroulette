@@ -1,0 +1,127 @@
+:root {
+  --spin: 5;
+}
+
+.roulette {
+  position: absolute;
+  bottom: -50vh;
+  height: 100vh;
+  width: 100vh;
+}
+
+.roulette:hover {
+  animation: 
+    rotate1 1s 0.5s ease-in-out forwards,
+    rotate2 1s 2s ease-in-out forwards, 
+    rotate3 1s 3.5s ease-in-out forwards,
+    rotate4 1s 5s ease-in-out forwards, 
+    rotate5 1s 6.5s ease-in-out forwards,
+    spin 1.1s 8s cubic-bezier(0.39,-0.01, 0.58, 0.97) forwards;
+}
+
+.roulette img {
+  height: 100%;
+  width: 100%;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.7));
+}
+
+.roulette .album {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.roulette .album img {
+  height: 22.6vh;
+  width: 22.6vh;
+  margin-top: calc(9.6vh + 22.8vh);
+  border-radius: 11.3vh;
+}
+
+.roulette:hover .album:nth-child(1) img {
+  animation: load 0.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
+}
+.roulette:hover .album:nth-child(2) img {
+  animation: load 0.5s 1.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
+}
+.roulette:hover .album:nth-child(3) img {
+  animation: load 0.5s 3s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
+}
+.roulette:hover .album:nth-child(4) img {
+  animation: load 0.5s 4.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
+}
+.roulette:hover .album:nth-child(5) img {
+  animation: load 0.5s 6s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
+}
+.roulette:hover .album:nth-child(6) img {
+  animation: load 0.5s 7.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
+}
+
+@keyframes load {
+  0% {
+  }
+
+  100% {
+    margin-top: 9.7vh;
+  }
+}
+
+@keyframes rotate1 {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(60deg);
+  }
+}
+@keyframes rotate2 {
+  0% {
+    transform: rotate(60deg);
+  }
+  100% {
+    transform: rotate(120deg);
+  }
+}
+@keyframes rotate3 {
+  0% {
+    transform: rotate(120deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes rotate4 {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(240deg);
+  }
+}
+@keyframes rotate5 {
+  0% {
+    transform: rotate(240deg);
+  }
+  100% {
+    transform: rotate(300deg);
+  }
+}
+@keyframes rotate6 {
+  0% {
+    transform: rotate(300deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(300deg);
+  }
+  100% {
+    transform: rotate(calc(360deg * 5 + 60deg * var(--spin)));
+  }
+}
