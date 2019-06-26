@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import './SongInput.css'
 import SearchLogo from '../../images/search.svg'
 import Result from './searchResult/Result'
@@ -10,6 +10,7 @@ type SongInputProps = {
   results: SearchResult
   onSearch: (query: string) => void
   onResultClick: (position: number) => void
+  locked: boolean
 }
 
 const SongInput: React.FC<SongInputProps> = props => {
@@ -17,26 +18,46 @@ const SongInput: React.FC<SongInputProps> = props => {
   const [state, setState] = useState('')
   const [query, setQuery] = useState('')
 
-  useEffect(() => {
-    if (searchInput.current) {
-      searchInput.current.addEventListener('focus', () => updateSize(true))
-      searchInput.current.addEventListener('focusout', () => updateSize(false))
-    }
-  })
-
-  const updateSize = (focused: boolean) => {
+  const updateSize = useCallback((focused: boolean) => {
     if (focused && query.length === 0) setState('focused')
     else if (focused || query.length > 0) setState('focused')
     else {
       setState('')
     }
-  }
+  }, [query.length])
 
-  const onSearchClick = () => {
+  const onSearchClick = useCallback(() => {
     if (query !== null && query !== '') {
       props.onSearch(query)
     }
-  }
+  }, [query, props])
+
+  useEffect(() => {
+    const input = searchInput.current;
+    const focus = () => updateSize(true)
+    const focusout = () => updateSize(false)
+    const onKeypress = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') onSearchClick()
+    }
+
+    if (input !== null) {
+      input.addEventListener('focus', focus)
+      input.addEventListener('focusout', focusout)
+      input.addEventListener('keypress', onKeypress)
+    }
+
+    return () => {
+      if(input !== null) {
+        input.removeEventListener('focus', focus)
+        input.removeEventListener('focusout', focusout)
+        input.removeEventListener('keypress', onKeypress)
+      }
+    }
+  }, [onSearchClick, updateSize])
+
+  useEffect(() => {
+    if (props.locked) setState('')
+  }, [props.locked])
 
   const onQueryChange: onChange = e => {
     setQuery(e.target.value)
@@ -47,7 +68,14 @@ const SongInput: React.FC<SongInputProps> = props => {
   ))
 
   return (
-    <div className={`input ${state}`} style={{height: `${88 + (64 * props.results.length) + (props.results.length ? 8 : 0)}px`}}>
+    <div
+      className={`input ${state}`}
+      style={{
+        height: `${88 +
+          64 * props.results.length +
+          (props.results.length ? 8 : 0)}px`
+      }}
+    >
       <div className='searchBar'>
         <input
           type='text'
@@ -55,12 +83,15 @@ const SongInput: React.FC<SongInputProps> = props => {
           value={query}
           onChange={onQueryChange}
           placeholder='Search'
+          disabled={props.locked}
         ></input>
         <button onClick={onSearchClick}>
           <img src={SearchLogo} alt=''></img>
         </button>
       </div>
-      {!!props.results.length && <div className='results'>{resultElements}</div>}
+      {!!props.results.length && (
+        <div className='results'>{resultElements}</div>
+      )}
     </div>
   )
 }

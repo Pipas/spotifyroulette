@@ -31,12 +31,12 @@ const App: React.FC = () => {
   const onResultClick = (position: number): void => {
     if (blank === undefined) {
       setBlank(results[position])
-      setResults([])
     } else {
       setBullet(results[position])
-      setResults([])
-      setState(RouletteState.LOAD)
     }
+
+    setResults([])
+    setState(RouletteState.LOAD)
   }
 
   const onShoot = (isBullet: boolean) : void => {
@@ -50,6 +50,7 @@ const App: React.FC = () => {
           results={controller.current.formatResults(results)}
           onSearch={(query: string) => controller.current.search(query)}
           onResultClick={onResultClick}
+          locked={state !== RouletteState.IDLE}
         />
         <ActionButton src={spin} visible={state === RouletteState.SHOT} />
       </div>
@@ -58,7 +59,7 @@ const App: React.FC = () => {
         bullet={controller.current.getItemSrc(bullet)}
         state={state}
         setState={setState}
-        chooseBullet={false}
+        chooseBullet={true}
         onShoot={onShoot}
       />
     </div>

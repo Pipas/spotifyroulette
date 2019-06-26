@@ -135,12 +135,14 @@ const Roulette: React.FC<RouletteProps> = props => {
 
       setTimeout(() => {
         setAngle(randomShot)
-        setCSSPreviousAngle(randomShot)
         props.setState(RouletteState.SHOT)
-        props.onShoot(randomShot === 5)
       }, 1700)
 
       props.setState(RouletteState.SPINING)
+    } else if (props.state === RouletteState.SHOT) {
+      setCSSPreviousAngle(chosenShot)
+      props.onShoot(chosenShot === 5)
+      props.setState(RouletteState.IDLE)
     }
   })
 
