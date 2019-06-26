@@ -17,9 +17,10 @@ const App: React.FC = () => {
       <SongInput spotify={spotify.current} />
       <button onClick={() => setRouletteState('load')}>Try me</button>
       <Roulette
-        blank='https://upload.wikimedia.org/wikipedia/en/5/50/Sgt._Pepper%27s_Lonely_Hearts_Club_Band.jpg'
-        bullet='https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg'
+        blank='https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg'
+        bullet='https://upload.wikimedia.org/wikipedia/en/9/9e/No_Love_Deep_Web_artwork.png'
         state={rouletteState}
+        setState={setRouletteState}
       />
     </div>
   )
