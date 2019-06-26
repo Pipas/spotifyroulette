@@ -10,10 +10,10 @@
     "@types/react-dom": "16.8.4",
     "@types/react-howler": "^3.7.0",
     "gh-pages": "^2.0.1",
+    "howler": "^2.1.2",
     "prettier": "^1.18.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-howler": "^3.7.4",
     "react-scripts": "3.0.1",
     "spotify-web-api-js": "^1.2.0",
     "typescript": "3.5.2"

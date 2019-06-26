@@ -4539,7 +4539,7 @@ hosted-git-info@^2.1.4:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.7.1.tgz#97f236977bd6e125408930ff6de3eec6281ec047"
   integrity sha512-7T/BxH19zbcCTa8XkMlbK5lTo1WtgkFi3GvdWEyNuc4Vex7/9Dqbnpsf4JMydcfj9HCg4zUWFTL3Za6lapg5/w==
 
-howler@^2.1.1:
+howler@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/howler/-/howler-2.1.2.tgz#8433a09d8fe84132a3e726e05cb2bd352ef8bd49"
   integrity sha512-oKrTFaVXsDRoB/jik7cEpWKTj7VieoiuzMYJ7E/EU5ayvmpRhumCv3YQ3823zi9VTJkSWAhbryHnlZAionGAJg==
@@ -7781,7 +7781,7 @@ prompts@^2.0.1:
     kleur "^3.0.2"
     sisteransi "^1.0.0"
 
-prop-types@^15.5.6, prop-types@^15.6.2:
+prop-types@^15.6.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -8004,14 +8004,6 @@ react-error-overlay@^5.1.6:
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.1.6.tgz#0cd73407c5d141f9638ae1e0c63e7b2bf7e9929d"
   integrity sha512-X1Y+0jR47ImDVr54Ab6V9eGk0Hnu7fVWGeHQSOXHf/C2pF9c6uy3gef8QUeuUiWlNb0i08InPSE5a/KJzNzw1Q==
-
-react-howler@^3.7.4:
-  version "3.7.4"
-  resolved "https://registry.yarnpkg.com/react-howler/-/react-howler-3.7.4.tgz#66b4e1eb9f94cb86aa8def9d0b8afaac0ebffffc"
-  integrity sha512-cQhzgIZd8wf6drtyjGJtT/9ShfN20jSyse+dGCPL9v5erz0pdusTQqGhuqFdVkNmYWfk2TQVck5w4nHqaCCyyg==
-  dependencies:
-    howler "^2.1.1"
-    prop-types "^15.5.6"
 
 react-is@^16.8.1, react-is@^16.8.4:
   version "16.8.6"

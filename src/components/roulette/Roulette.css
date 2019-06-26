@@ -1,6 +1,6 @@
 :root {
-  --spin: 1;
-  --color : '#000000'
+  --next: 1;
+  --previous: 0;
 }
 
 .roulette {
@@ -9,16 +9,20 @@
   height: 100vh;
   width: 100vh;
   background-color: var(--color);
+  transition: transform .5s cubic-bezier(0.39,-0.01, 0.58, 0.97);
 }
 
-.roulette.load {
+.roulette.loading {
   animation: 
     rotate1 1s 0.5s ease-in-out forwards,
     rotate2 1s 2s ease-in-out forwards, 
     rotate3 1s 3.5s ease-in-out forwards,
     rotate4 1s 5s ease-in-out forwards, 
-    rotate5 1s 6.5s ease-in-out forwards,
-    spin 1.2s 8.3s cubic-bezier(0.39,-0.01, 0.58, 0.97) forwards;
+    rotate5 1s 6.5s ease-in-out forwards;
+}
+
+.roulette.spining {
+  animation: spin 1.2s cubic-bezier(0.39,-0.01, 0.58, 0.97) forwards;
 }
 
 .roulette img {
@@ -38,47 +42,22 @@
 .roulette .container .cover {
   height: 22.6vh;
   width: 22.6vh;
-}
-
-.roulette.idle .container .cover {
   margin-top: calc(9.6vh + 22.8vh);
+  transition: margin-top 0.4s cubic-bezier(0.28, 1.07, 0.4, 0.99);
 }
 
-.roulette.load .container .cover {
-  margin-top: calc(9.6vh + 22.8vh);
-}
-
-.roulette.shot .container .cover {
+.roulette .container .cover.load {
   margin-top: 9.7vh;
+}
+
+.roulette .container .cover img.shot {
+  animation: shot 0.1s ease-in;
 }
 
 .roulette .container .cover img {
   height: 100%;
   width: 100%;
   border-radius: 11.3vh;
-}
-
-.roulette.load .container:nth-child(1) .cover {
-  animation: load 0.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
-}
-.roulette.load .container:nth-child(2) .cover {
-  animation: load 0.5s 1.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
-}
-.roulette.load .container:nth-child(3) .cover {
-  animation: load 0.5s 3s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
-}
-.roulette.load .container:nth-child(4) .cover {
-  animation: load 0.5s 4.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
-}
-.roulette.load .container:nth-child(5) .cover {
-  animation: load 0.5s 6s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
-}
-.roulette.load .container:nth-child(6) .cover {
-  animation: load 0.5s 7.5s cubic-bezier(0.28, 1.07, 0.4, 0.99) forwards;
-}
-
-.roulette .container .cover img.shot {
-  animation: shot 0.1s ease-in;
 }
 
 @keyframes shot {
@@ -90,16 +69,6 @@
   }
   100% {
     transform: scale(1);
-  }
-}
-
-@keyframes load {
-  0% {
-    margin-top: calc(9.6vh + 22.8vh);
-  }
-
-  100% {
-    margin-top: 9.7vh;
   }
 }
 
@@ -154,9 +123,9 @@
 
 @keyframes spin {
   0% {
-    transform: rotate(300deg);
+    transform: rotate(calc(60deg * var(--previous)));
   }
   100% {
-    transform: rotate(calc(360deg * 5 + 60deg * var(--spin)));
+    transform: rotate(calc(360deg * 5 + 60deg * var(--next)));
   }
 }
