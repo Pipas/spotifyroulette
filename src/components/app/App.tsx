@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Spotify } from '../../utils/spoitfy'
+import { Spotify } from '../../utils/Spoitfy'
 import './App.css'
 import SongInput from '../songInput/songInput'
 import Roulette from '../roulette/Roulette'
+import ActionButton from '../actionButton/ActionButton'
+import spin from '../../images/spin.svg'
+import { TrackController } from '../../utils/ContextController'
 
 export enum RouletteState {
   IDLE = 'idle',
@@ -15,23 +18,48 @@ export enum RouletteState {
 
 const App: React.FC = () => {
   const spotify = useRef(new Spotify())
-  const [rouletteState, setRouletteState] = useState(RouletteState.IDLE)
+  const [state, setState] = useState(RouletteState.IDLE)
+  const [results, setResults] = useState<any>([])
+  const [bullet, setBullet] = useState<any>()
+  const [blank, setBlank] = useState<any>()
+  const controller = useRef(new TrackController(spotify.current, setResults))
 
   useEffect(() => {
-    //if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
+    if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
   }, [])
+
+  const onResultClick = (position: number): void => {
+    if (blank === undefined) {
+      setBlank(results[position])
+      setResults([])
+    } else {
+      setBullet(results[position])
+      setResults([])
+      setState(RouletteState.LOAD)
+    }
+  }
+
+  const onShoot = (isBullet: boolean) : void => {
+    controller.current.play(isBullet ? bullet : blank)
+  }
 
   return (
     <div className='app'>
-      <SongInput spotify={spotify.current} />
-      <button onClick={() => setRouletteState(RouletteState.LOAD)}>Try me</button>
-      <button onClick={() => setRouletteState(RouletteState.SPIN)}>Spin</button>
+      <div className='controls'>
+        <SongInput
+          results={controller.current.formatResults(results)}
+          onSearch={(query: string) => controller.current.search(query)}
+          onResultClick={onResultClick}
+        />
+        <ActionButton src={spin} visible={state === RouletteState.SHOT} />
+      </div>
       <Roulette
-        blank='https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg'
-        bullet='https://upload.wikimedia.org/wikipedia/en/9/9e/No_Love_Deep_Web_artwork.png'
-        state={rouletteState}
-        setState={setRouletteState}
-        chooseBullet={true}
+        blank={controller.current.getItemSrc(blank)}
+        bullet={controller.current.getItemSrc(bullet)}
+        state={state}
+        setState={setState}
+        chooseBullet={false}
+        onShoot={onShoot}
       />
     </div>
   )

@@ -3,17 +3,18 @@ import './Result.css'
 
 type ResultProps = {
   title: string
-  artist: string
-  cover: string
+  author: string
+  src: string
+  onClick: () => void
 }
 
 const Result: React.FC<ResultProps> = props => {
   return (
-    <div className='result'>
-      <img className='cover' src={props.cover} alt={`${props.title} Album Cover`}></img>
+    <div className='result' onClick={props.onClick}>
+      <img className='cover' src={props.src} alt={`${props.title} Album Cover`}></img>
       <div className='info'>
         <h2 className='title'>{props.title}</h2>
-        <p className='artist'>{props.artist}</p>
+        <p className='artist'>{props.author}</p>
       </div>
     </div>
   )

@@ -19,7 +19,8 @@ export class Spotify {
     const clientId = '41e10dc3f3594667b190b3681fdee8ca'
     const redirectUri = process.env.NODE_ENV === 'production' ? 'https://spotifyroulette.paulocorreia.me' : 'http://localhost:3000/'
     const scopes = [
-      'user-top-read'
+      'user-top-read',
+      'user-modify-playback-state'
     ];
 
     // If there is no token, redirect to Spotify authorization
@@ -33,6 +34,10 @@ export class Spotify {
 
   searchTrack(query: string): Promise<SpotifyApi.TrackSearchResponse> {
     return this.client.searchTracks(query)
+  }
+
+  play(options: SpotifyApi.PlayParameterObject) {
+    return this.client.play(options)
   }
 
   isAuthenticated() {

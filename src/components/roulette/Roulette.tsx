@@ -17,6 +17,7 @@ type RouletteProps = {
   state: RouletteState
   setState: React.Dispatch<React.SetStateAction<RouletteState>>
   chooseBullet: boolean
+  onShoot: (isBullet: boolean) => void
 }
 
 const useSpinSound = (play: boolean) => {
@@ -136,6 +137,7 @@ const Roulette: React.FC<RouletteProps> = props => {
         setAngle(randomShot)
         setCSSPreviousAngle(randomShot)
         props.setState(RouletteState.SHOT)
+        props.onShoot(randomShot === 5)
       }, 1700)
 
       props.setState(RouletteState.SPINING)
