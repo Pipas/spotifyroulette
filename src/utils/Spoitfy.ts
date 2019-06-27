@@ -3,6 +3,7 @@ import SpotifyWebApi from 'spotify-web-api-js'
 export class Spotify {
   private client: SpotifyWebApi.SpotifyWebApiJs
   private auth: boolean = false
+  private deviceId: string = ''
 
   constructor() {
     this.client = new SpotifyWebApi()
@@ -20,7 +21,8 @@ export class Spotify {
     const redirectUri = process.env.NODE_ENV === 'production' ? 'https://spotifyroulette.paulocorreia.me' : 'http://localhost:3000/'
     const scopes = [
       'user-top-read',
-      'user-modify-playback-state'
+      'user-modify-playback-state',
+      'user-read-playback-state'
     ];
 
     // If there is no token, redirect to Spotify authorization
@@ -37,7 +39,22 @@ export class Spotify {
   }
 
   play(options: SpotifyApi.PlayParameterObject) {
-    return this.client.play(options)
+    if(this.deviceId !== '')
+      this.client.play({device_id: this.deviceId, ...options}).catch()
+  }
+
+  async hasPlayerOpen() : Promise<boolean> {
+    const devices = await this.client.getMyDevices()
+    if (devices.devices.length === 0)
+      return false
+    else {
+      if(devices.devices[0].id !== null) {
+        this.deviceId = devices.devices[0].id
+        return true
+      }
+      else
+        return false
+    }
   }
 
   isAuthenticated() {

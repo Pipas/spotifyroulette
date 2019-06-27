@@ -113,7 +113,7 @@ const Roulette: React.FC<RouletteProps> = props => {
           }, 7500)
         } else if (loadState === LoadState.HALF) {
           loadRoulette(() => {
-            props.setState(RouletteState.SPIN)
+            props.setState(RouletteState.READY)
             setLoadState(LoadState.FULL)
             setCSSPreviousAngle(5)
           }, 500)
@@ -125,7 +125,7 @@ const Roulette: React.FC<RouletteProps> = props => {
 
         loadRoulette(() => {
           setAngle(5)
-          props.setState(RouletteState.SPIN)
+          props.setState(RouletteState.READY)
           setLoadState(LoadState.FULL)
           setCSSPreviousAngle(5)
         }, 8300)
