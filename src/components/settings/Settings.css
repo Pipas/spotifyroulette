@@ -1,0 +1,86 @@
+.settingsDialog {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 360px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.32);
+  z-index: 12;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: transform 0.3s ease-in, opacity 0.3s ease-out;
+}
+
+.settingsDialog.hidden {
+  transform: translate(-50%, -40%);
+  opacity: 0;
+}
+
+.settingsDialog h2 {
+  font-family: 'Cabin', sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 32px;
+}
+
+
+.settingsDialog h3 {
+  font-family: 'Cabin', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.settingsDialog p {
+  font-family: 'Cabin', sans-serif;
+  color: #8d8d8d;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.settingsDialog .apply {
+  width: 100%;
+  background-color: #1db954;
+  color: #ffffff;
+  border: none;
+  align-self: flex-end;
+  font-family: 'Cabin', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  box-sizing: border-box;
+  padding: 12px 32px;
+  border-radius: 24px;
+  margin-top: 32px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.32);
+}
+
+.settingsDialog .apply:active {
+  transform: translateY(2px);
+  transition: all 0.1 ease-in;
+}
+
+.settingsDialog button {
+  cursor: pointer;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.close {
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.close:hover {
+  cursor: pointer;
+}

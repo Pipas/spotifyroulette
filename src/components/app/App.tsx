@@ -5,8 +5,14 @@ import SongInput from '../songInput/songInput'
 import Roulette from '../roulette/Roulette'
 import ActionButton from '../actionButton/ActionButton'
 import spin from '../../images/spin.svg'
+import settingsGear from '../../images/settings.svg'
 import { TrackController } from '../../utils/ContextController'
 import WarningDialog from '../warningDialog/WarningDialog'
+import Settings from '../settings/Settings'
+
+export enum BulletType {
+  Songs, Albums, Artists
+}
 
 export enum RouletteState {
   IDLE = 'idle',
@@ -16,6 +22,16 @@ export enum RouletteState {
   SPIN = 'spin',
   SPINING = 'spining',
   SHOT = 'shot'
+}
+
+const useSettingsOpen = (): [boolean, () => void] => {
+  const [settingsOpen, setSettingsOpen] = useState(false)
+
+  const toggleSettings = () => {
+    setSettingsOpen(!settingsOpen)
+  }
+
+  return [settingsOpen, toggleSettings]
 }
 
 const usePlayerOpen = (spotify: Spotify, state: RouletteState, setState: React.Dispatch<React.SetStateAction<RouletteState>>): [boolean, () => void, React.Dispatch<any>] => {
@@ -44,9 +60,11 @@ const App: React.FC = () => {
   const [blank, setBlank] = useState<any>()
   const controller = useRef(new TrackController(spotify.current, setResults))
   const [playerOpen, checkPlayerOpen, setPlayerOpen] = usePlayerOpen(spotify.current, state, setState)
+  const [settingsOpen, toggleSettingsOpen] = useSettingsOpen()
+  const [bulletType, setBulletType] = useState(BulletType.Songs)
 
   useEffect(() => {
-    if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
+    //if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
   }, [])
 
   const onResultClick = (position: number): void => {
@@ -88,7 +106,9 @@ const App: React.FC = () => {
         chooseBullet={true}
         onShoot={onShoot}
       />
+      <img className='settingsButton' src={settingsGear} onClick={toggleSettingsOpen} alt=''></img>
       <WarningDialog visible={!playerOpen && playerOpen !== undefined} onRetryClick={checkPlayerOpen} onContinueClick={onContinueClick} />
+      <Settings visible={settingsOpen} toggleVisibility={toggleSettingsOpen} bulletType={bulletType} setBulletType={setBulletType}/>
     </div>
   )
 }
