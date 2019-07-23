@@ -10,6 +10,7 @@ type SettingChipsProps = {
 const SettingChips: React.FC<SettingChipsProps> = props => {
   const chips = props.chips.map((chip, i) => (
     <div
+      key={i}
       className={`chip ${i === props.selected ? 'selected' : ''}`}
       onClick={() => props.onSelect(i)}
     >

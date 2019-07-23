@@ -3,8 +3,7 @@ import { Spotify } from '../../utils/Spoitfy'
 import './App.css'
 import SongInput from '../songInput/songInput'
 import Roulette from '../roulette/Roulette'
-import ActionButton from '../actionButton/ActionButton'
-import spin from '../../images/spin.svg'
+import ActionButtons from '../actionButtons/ActionButtons'
 import settingsGear from '../../images/settings.svg'
 import { TrackController } from '../../utils/ContextController'
 import WarningDialog from '../warningDialog/WarningDialog'
@@ -15,6 +14,7 @@ export enum BulletType {
 }
 
 export enum RouletteState {
+  RESET = 'reset',
   IDLE = 'idle',
   LOAD = 'load',
   LOADING = 'loading',
@@ -64,7 +64,7 @@ const App: React.FC = () => {
   const [bulletType, setBulletType] = useState(BulletType.Songs)
 
   useEffect(() => {
-    //if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
+    if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
   }, [])
 
   const onResultClick = (position: number): void => {
@@ -87,6 +87,12 @@ const App: React.FC = () => {
     setPlayerOpen(true)
   }
 
+  const resetRoulette = () => {
+    setBullet(undefined)
+    setBlank(undefined)
+    setState(RouletteState.RESET)
+  }
+
   return (
     <div className='app'>
       <div className='controls'>
@@ -96,7 +102,7 @@ const App: React.FC = () => {
           onResultClick={onResultClick}
           locked={state !== RouletteState.IDLE}
         />
-        <ActionButton src={spin} visible={state === RouletteState.SHOT} />
+        <ActionButtons visible={state === RouletteState.SHOT} onRerollClick={() => setState(RouletteState.SPIN)} onResetClick={resetRoulette}/>
       </div>
       <Roulette
         blank={controller.current.getItemSrc(blank)}

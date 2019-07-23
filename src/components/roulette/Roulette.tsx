@@ -142,6 +142,8 @@ const Roulette: React.FC<RouletteProps> = props => {
     } else if (props.state === RouletteState.SHOT) {
       setCSSPreviousAngle(chosenShot)
       props.onShoot(chosenShot === 5)
+    } else if (props.state === RouletteState.RESET) {
+      resetRoulette()
       props.setState(RouletteState.IDLE)
     }
   })

@@ -15,12 +15,13 @@
   top: 50%;
   transform: translate(-50%, -50%);
   opacity: 1;
-  transition: transform 0.3s ease-in, opacity 0.3s ease-out;
+  transition: all 0.3s ease-in, opacity 0.3s ease-out;
 }
 
 .settingsDialog.hidden {
   transform: translate(-50%, -40%);
   opacity: 0;
+  visibility: hidden;
 }
 
 .settingsDialog h2 {

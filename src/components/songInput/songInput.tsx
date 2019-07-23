@@ -32,6 +32,11 @@ const SongInput: React.FC<SongInputProps> = props => {
     }
   }, [query, props])
 
+  const onResultClick = (position: number) => {
+    setQuery('')
+    props.onResultClick(position)
+  }
+
   useEffect(() => {
     const input = searchInput.current;
     const focus = () => updateSize(true)
@@ -64,7 +69,7 @@ const SongInput: React.FC<SongInputProps> = props => {
   }
 
   const resultElements = props.results.map((result, i) => (
-    <Result key={i} {...result} onClick={() => props.onResultClick(i)} />
+    <Result key={i} {...result} onClick={() => onResultClick(i)} />
   ))
 
   return (

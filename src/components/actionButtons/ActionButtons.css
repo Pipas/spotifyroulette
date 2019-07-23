@@ -1,6 +1,4 @@
 .actionButton {
-  position: absolute;
-  right: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,17 +7,30 @@
   background-color: #ffffff;
   border-radius: 28px;
   border: none;
-  padding: 16px;
+  padding: 8px;
   box-sizing: border-box;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.32);
+  margin-left: 16px;
+}
+
+.actionButtonContainer {
+  position: absolute;
+  right: 16px;
+  display: flex;
+  flex-direction: row;
   transition: right 0.15s ease-in-out;
   z-index: 0;
+}
+
+.actionButton img {
+  height: 24px;
+  width: 24px;
 }
 
 .actionButton:hover {
   cursor: pointer;
 }
 
-.actionButton.visible {
-  right: -72px;
+.actionButtonContainer.visible {
+  right: -128px;
 }

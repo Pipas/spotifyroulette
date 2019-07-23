@@ -21,6 +21,7 @@
 .warningDialog.hidden {
   transform: translate(-50%, -40%);
   opacity: 0;
+  visibility: hidden;
 }
 
 .warningDialog img {
