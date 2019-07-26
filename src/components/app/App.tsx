@@ -5,7 +5,7 @@ import SongInput from '../songInput/songInput'
 import Roulette from '../roulette/Roulette'
 import ActionButtons from '../actionButtons/ActionButtons'
 import settingsGear from '../../images/settings.svg'
-import { TrackController } from '../../utils/ContextController'
+import { TrackController, SearchResult } from '../../utils/ContextController'
 import WarningDialog from '../warningDialog/WarningDialog'
 import Settings from '../settings/Settings'
 
@@ -55,10 +55,10 @@ const usePlayerOpen = (spotify: Spotify, state: RouletteState, setState: React.D
 const App: React.FC = () => {
   const spotify = useRef(new Spotify())
   const [state, setState] = useState(RouletteState.IDLE)
-  const [results, setResults] = useState<any>([])
+  const [searchResult, setSearchResult] = useState<any>(new SearchResult(false, []))
   const [bullet, setBullet] = useState<any>()
   const [blank, setBlank] = useState<any>()
-  const controller = useRef(new TrackController(spotify.current, setResults))
+  const controller = useRef(new TrackController(spotify.current, setSearchResult))
   const [playerOpen, checkPlayerOpen, setPlayerOpen] = usePlayerOpen(spotify.current, state, setState)
   const [settingsOpen, toggleSettingsOpen] = useSettingsOpen()
   const [bulletType, setBulletType] = useState(BulletType.Songs)
@@ -69,12 +69,12 @@ const App: React.FC = () => {
 
   const onResultClick = (position: number): void => {
     if (blank === undefined) {
-      setBlank(results[position])
+      setBlank(searchResult.results[position])
     } else {
-      setBullet(results[position])
+      setBullet(searchResult.results[position])
     }
 
-    setResults([])
+    setSearchResult(new SearchResult(false, []))
     setState(RouletteState.LOAD)
   }
 
@@ -93,14 +93,26 @@ const App: React.FC = () => {
     setState(RouletteState.RESET)
   }
 
+  const resolveTooltip = () : string => {
+    if (state ===  RouletteState.IDLE)
+      return blank === undefined ? 'Search for the blanks' : 'Search for the bullet!'
+    else if(state === RouletteState.LOADING)
+      return 'Loading weapon.'
+    else if(state === RouletteState.SHOT)
+      return 'Reset or Reroll'
+    else
+      return ''
+  }
+
   return (
     <div className='app'>
       <div className='controls'>
         <SongInput
-          results={controller.current.formatResults(results)}
+          searchResult={controller.current.formatResults(searchResult)}
           onSearch={(query: string) => controller.current.search(query)}
           onResultClick={onResultClick}
           locked={state !== RouletteState.IDLE}
+          tooltip={resolveTooltip()}
         />
         <ActionButtons visible={state === RouletteState.SHOT} onRerollClick={() => setState(RouletteState.SPIN)} onResetClick={resetRoulette}/>
       </div>
