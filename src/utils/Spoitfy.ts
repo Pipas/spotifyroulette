@@ -57,8 +57,10 @@ export class Spotify {
   }
 
   play(item: SpotifyItem | undefined) {
-    if (this.deviceId !== '' && item !== undefined)
-      this.client.play({ device_id: this.deviceId, uris: [item.uri] }).catch()
+    if (this.deviceId !== '' && item !== undefined) {
+      this.client.setShuffle(item.shuffle)
+      this.client.play({ device_id: this.deviceId, ...item.playParameters }).catch()
+    }
   }
 
   async hasPlayerOpen(): Promise<boolean> {

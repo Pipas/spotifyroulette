@@ -5,7 +5,7 @@ import SongInput from '../songInput/songInput'
 import Roulette from '../roulette/Roulette'
 import ActionButtons from '../actionButtons/ActionButtons'
 import settingsGear from '../../images/settings.svg'
-import { TrackController, SearchResult, SpotifyItem } from '../../utils/ContextController'
+import { TrackController, SearchResult, SpotifyItem, AlbumController, ArtistController } from '../../utils/ContextController'
 import WarningDialog from '../warningDialog/WarningDialog'
 import Settings from '../settings/Settings'
 
@@ -63,7 +63,19 @@ const App: React.FC = () => {
   const [settingsOpen, toggleSettingsOpen] = useSettingsOpen()
 
   useEffect(() => {
-
+    switch (bulletType) {
+      case BulletType.Songs:
+        spotify.current.setController(new TrackController())
+        break;
+      case BulletType.Albums:
+        spotify.current.setController(new AlbumController())
+        break;
+      case BulletType.Artists:
+        spotify.current.setController(new ArtistController())
+        break;
+      default:
+        break;
+    }
   }, [bulletType])
 
   useEffect(() => {
