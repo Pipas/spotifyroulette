@@ -1,54 +1,32 @@
-import { Spotify } from './Spoitfy'
+import { SpotifyClient } from './Spoitfy'
 
-export interface IContextController {
-  search(query: string): void
+export interface ContextController {
+  search(query: string, client: SpotifyClient): Promise<SearchResult>
 }
 
-export class SearchResult<T> {
-  constructor(public display: boolean, public results: T[]) {}
+export type SpotifyItem = {
+  title: string
+  author: string
+  image: string
+  uri: string
 }
 
-export class GenericSearchResult {
-  constructor(
-    public display: boolean,
-    public results: { title: string; author: string; src: string }[]
-  ) {}
+export class SearchResult {
+  constructor(public display: boolean, public results: SpotifyItem[]) {}
 }
 
-export class ContextController<T> {
-  constructor(
-    protected spotify: Spotify,
-    protected setResults: React.Dispatch<SearchResult<T>>
-  ) {}
-}
-
-export class TrackController extends ContextController<
-  SpotifyApi.TrackObjectFull
-> {
-  search(query: string): void {
-    this.spotify.searchTrack(query).then(data => {
-      this.setResults(new SearchResult(true, data.tracks.items.slice(0, 3)))
-    })
+export class TrackController implements ContextController {
+  async search(query: string, client: SpotifyClient): Promise<SearchResult> {
+    const tracks = await client.searchTracks(query)
+    return new SearchResult(true, tracks.tracks.items.slice(0, 3).map(this.formatResult))
   }
 
-  formatResults(
-    searchResult: SearchResult<SpotifyApi.TrackObjectFull>
-  ): GenericSearchResult {
-    return new GenericSearchResult(
-      searchResult.display,
-      searchResult.results.map(result => ({
-        title: result.name,
-        author: result.artists[0].name,
-        src: result.album.images[0].url
-      }))
-    )
-  }
-
-  getItemSrc(item: SpotifyApi.TrackObjectFull): string {
-    return item === undefined ? '' : item.album.images[0].url
-  }
-
-  play(track: SpotifyApi.TrackObjectFull): void {
-    this.spotify.play({ uris: [track.uri] })
+  formatResult(track: SpotifyApi.TrackObjectFull): SpotifyItem {
+    return {
+        title: track.name,
+        author: track.artists[0].name,
+        image: track.album.images[0].url,
+        uri: track.uri
+      }
   }
 }

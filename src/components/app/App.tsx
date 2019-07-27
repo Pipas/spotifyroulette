@@ -5,7 +5,7 @@ import SongInput from '../songInput/songInput'
 import Roulette from '../roulette/Roulette'
 import ActionButtons from '../actionButtons/ActionButtons'
 import settingsGear from '../../images/settings.svg'
-import { TrackController, SearchResult } from '../../utils/ContextController'
+import { TrackController, SearchResult, SpotifyItem } from '../../utils/ContextController'
 import WarningDialog from '../warningDialog/WarningDialog'
 import Settings from '../settings/Settings'
 
@@ -53,15 +53,18 @@ const usePlayerOpen = (spotify: Spotify, state: RouletteState, setState: React.D
 }
 
 const App: React.FC = () => {
-  const spotify = useRef(new Spotify())
+  const spotify = useRef(new Spotify(new TrackController()))
   const [state, setState] = useState(RouletteState.IDLE)
-  const [searchResult, setSearchResult] = useState<any>(new SearchResult(false, []))
-  const [bullet, setBullet] = useState<any>()
-  const [blank, setBlank] = useState<any>()
-  const controller = useRef(new TrackController(spotify.current, setSearchResult))
+  const [bullet, setBullet] = useState<SpotifyItem>()
+  const [blank, setBlank] = useState<SpotifyItem>()
+  const [bulletType, setBulletType] = useState(BulletType.Songs)
+  const [searchResult, setSearchResult] = useState<SearchResult>(new SearchResult(false, []))
   const [playerOpen, checkPlayerOpen, setPlayerOpen] = usePlayerOpen(spotify.current, state, setState)
   const [settingsOpen, toggleSettingsOpen] = useSettingsOpen()
-  const [bulletType, setBulletType] = useState(BulletType.Songs)
+
+  useEffect(() => {
+
+  }, [bulletType])
 
   useEffect(() => {
     if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
@@ -78,8 +81,14 @@ const App: React.FC = () => {
     setState(RouletteState.LOAD)
   }
 
+  const onSearch = (query: string): void => {
+    spotify.current.search(query).then(
+      result => setSearchResult(result)
+    )
+  }
+
   const onShoot = (isBullet: boolean): void => {
-    controller.current.play(isBullet ? bullet : blank)
+    spotify.current.play(isBullet ? bullet : blank)
   }
 
   const onContinueClick = () => {
@@ -108,8 +117,8 @@ const App: React.FC = () => {
     <div className='app'>
       <div className='controls'>
         <SongInput
-          searchResult={controller.current.formatResults(searchResult)}
-          onSearch={(query: string) => controller.current.search(query)}
+          searchResult={searchResult}
+          onSearch={onSearch}
           onResultClick={onResultClick}
           locked={state !== RouletteState.IDLE}
           tooltip={resolveTooltip()}
@@ -117,8 +126,8 @@ const App: React.FC = () => {
         <ActionButtons visible={state === RouletteState.SHOT} onRerollClick={() => setState(RouletteState.SPIN)} onResetClick={resetRoulette}/>
       </div>
       <Roulette
-        blank={controller.current.getItemSrc(blank)}
-        bullet={controller.current.getItemSrc(bullet)}
+        blank={blank}
+        bullet={bullet}
         state={state}
         setState={setState}
         chooseBullet={true}

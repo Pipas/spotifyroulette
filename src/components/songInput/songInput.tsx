@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import './SongInput.css'
 import SearchLogo from '../../images/search.svg'
 import Result from './searchResult/Result'
-import { GenericSearchResult } from '../../utils/ContextController'
+import { SearchResult } from '../../utils/ContextController'
 
 type onChange = (event: React.ChangeEvent<HTMLInputElement>) => void
 
 type SongInputProps = {
-  searchResult: GenericSearchResult
+  searchResult: SearchResult
   onSearch: (query: string) => void
   onResultClick: (position: number) => void
   locked: boolean

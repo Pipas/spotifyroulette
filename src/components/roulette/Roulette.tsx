@@ -4,6 +4,7 @@ import './Roulette.css'
 import roulette from '../../images/roulette.svg'
 import RouletteAlbum from './RouletteAlbum'
 import { RouletteState } from '../app/App'
+import { SpotifyItem } from '../../utils/ContextController';
 
 enum LoadState {
   EMPTY = 'empty',
@@ -12,8 +13,8 @@ enum LoadState {
 }
 
 type RouletteProps = {
-  blank: string
-  bullet: string
+  blank: SpotifyItem | undefined
+  bullet: SpotifyItem | undefined
   state: RouletteState
   setState: React.Dispatch<React.SetStateAction<RouletteState>>
   chooseBullet: boolean
@@ -69,10 +70,10 @@ const Roulette: React.FC<RouletteProps> = props => {
     props.blank,
     props.blank,
     props.bullet
-  ].map((src, i) => (
+  ].map((item, i) => (
     <RouletteAlbum
       key={i}
-      src={src}
+      src={item !== undefined ? item.image : ''}
       position={i}
       shot={i === chosenShot && props.state === RouletteState.SHOT}
       load={i <= loadedShots}
