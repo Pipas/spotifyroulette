@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.2fbd7c2d.chunk.css",
-    "main.js": "/static/js/main.745784bf.chunk.js",
-    "main.js.map": "/static/js/main.745784bf.chunk.js.map",
+    "main.css": "/static/css/main.8c4023d1.chunk.css",
+    "main.js": "/static/js/main.181bec8d.chunk.js",
+    "main.js.map": "/static/js/main.181bec8d.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.cfc04a75.chunk.js": "/static/js/2.cfc04a75.chunk.js",
-    "static/js/2.cfc04a75.chunk.js.map": "/static/js/2.cfc04a75.chunk.js.map",
+    "static/js/2.2b8c3ed2.chunk.js": "/static/js/2.2b8c3ed2.chunk.js",
+    "static/js/2.2b8c3ed2.chunk.js.map": "/static/js/2.2b8c3ed2.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.521945ec7a8702d0539b112bfaa3e859.js": "/precache-manifest.521945ec7a8702d0539b112bfaa3e859.js",
+    "precache-manifest.c3511e09d2f1f6947f03435a3c1e59a7.js": "/precache-manifest.c3511e09d2f1f6947f03435a3c1e59a7.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.2fbd7c2d.chunk.css.map": "/static/css/main.2fbd7c2d.chunk.css.map",
+    "static/css/main.8c4023d1.chunk.css.map": "/static/css/main.8c4023d1.chunk.css.map",
     "static/media/close.svg": "/static/media/close.e85191c6.svg",
+    "static/media/reload.svg": "/static/media/reload.2991144a.svg",
+    "static/media/reshoot.svg": "/static/media/reshoot.99a86319.svg",
     "static/media/roulette.svg": "/static/media/roulette.dc8d006c.svg",
-    "static/media/search.svg": "/static/media/search.97161617.svg",
-    "static/media/settings.svg": "/static/media/settings.7c9f5af4.svg",
-    "static/media/spin.svg": "/static/media/spin.8f3bc11a.svg",
-    "static/media/warning.svg": "/static/media/warning.34c3adc3.svg"
+    "static/media/search.svg": "/static/media/search.9df51d4e.svg",
+    "static/media/settings.svg": "/static/media/settings.85c5dd08.svg",
+    "static/media/warning.svg": "/static/media/warning.6b87cfa4.svg"
   }
 }
