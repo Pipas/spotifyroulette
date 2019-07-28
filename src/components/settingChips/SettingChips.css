@@ -7,8 +7,8 @@
 }
 
 .chip {
-  background-color: #0000001a;
-  color: #8d8d8d;
+  background-color: #f6f6f4;
+  color: #000000;
   border: none;
   align-self: flex-end;
   font-family: 'Cabin', sans-serif;
@@ -19,8 +19,7 @@
 }
 
 .chip.selected {
-  background-color: #1db954;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.32);
+  background-color: #ff6c2c;
   color: #ffffff;
 }
 

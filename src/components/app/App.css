@@ -5,23 +5,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1db954;
+  background-color: #eba917;
   overflow: hidden;
 }
 
-.controls {
+.searchContainer {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .settingsButton {
   height: 32px;
   width: 32px;
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 32px;
+  right: 32px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 24px;
 }
 
 .settingsButton:hover {

@@ -1,7 +1,7 @@
 import React from 'react'
 import './ActionButtons.css'
-import spin from '../../images/spin.svg'
-import close from '../../images/close.svg'
+import reload from '../../images/reload.svg'
+import reshoot from '../../images/reshoot.svg'
 
 type ActionButtonProps = {
   visible: boolean
@@ -13,10 +13,12 @@ const ActionButtons: React.FC<ActionButtonProps> = props => {
   return (
     <div className={`actionButtonContainer ${props.visible ? 'visible' : ''}`}>
       <button className='actionButton' onClick={props.onResetClick} >
-        <img src={close} alt=''></img>
+        <img src={reload} alt=''></img>
+        Reset Gun.
       </button>
       <button className='actionButton' onClick={props.onRerollClick} >
-        <img src={spin} alt=''></img>
+        <img src={reshoot} alt=''></img>
+        Shoot again!
       </button>
     </div>
   )

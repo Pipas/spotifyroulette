@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Spotify } from '../../utils/Spoitfy'
 import './App.css'
-import SongInput from '../songInput/songInput'
+import SearchBar from '../searchBar/SearchBar'
 import Roulette from '../roulette/Roulette'
 import ActionButtons from '../actionButtons/ActionButtons'
 import settingsGear from '../../images/settings.svg'
 import { TrackController, SearchResult, SpotifyItem, AlbumController, ArtistController } from '../../utils/ContextController'
 import WarningDialog from '../warningDialog/WarningDialog'
 import Settings from '../settings/Settings'
+import Results from '../searchResults/Results';
 
 export enum BulletType {
   Songs, Albums, Artists
@@ -73,8 +74,6 @@ const App: React.FC = () => {
       case BulletType.Artists:
         spotify.current.setController(new ArtistController())
         break;
-      default:
-        break;
     }
   }, [bulletType])
 
@@ -115,26 +114,36 @@ const App: React.FC = () => {
   }
 
   const resolveTooltip = () : string => {
-    if (state ===  RouletteState.IDLE)
-      return blank === undefined ? 'Search for the blanks' : 'Search for the bullet!'
+    if (state ===  RouletteState.IDLE) {
+      if(blank === undefined) {
+        switch (bulletType) {
+          case BulletType.Songs:
+            return 'Search for a song to get started'
+          case BulletType.Albums:
+            return 'Search for an album to get started'
+          case BulletType.Artists:
+            return 'Search for an artist to get started'
+        }
+      }
+      else return 'Search for the bullet!'
+    }
     else if(state === RouletteState.LOADING)
-      return 'Loading weapon.'
+      return 'Loading weapon...'
     else if(state === RouletteState.SHOT)
-      return 'Reset or Reroll'
-    else
-      return ''
+      return 'Choose an option'
+    
+    return ''
   }
 
   return (
     <div className='app'>
-      <div className='controls'>
-        <SongInput
-          searchResult={searchResult}
+      <div className='searchContainer'>
+        <SearchBar
           onSearch={onSearch}
-          onResultClick={onResultClick}
           locked={state !== RouletteState.IDLE}
           tooltip={resolveTooltip()}
         />
+        <Results searchResult={searchResult} onResultClick={onResultClick}/>
         <ActionButtons visible={state === RouletteState.SHOT} onRerollClick={() => setState(RouletteState.SPIN)} onResetClick={resetRoulette}/>
       </div>
       <Roulette
@@ -146,7 +155,7 @@ const App: React.FC = () => {
         onShoot={onShoot}
       />
       <img className='settingsButton' src={settingsGear} onClick={toggleSettingsOpen} alt=''></img>
-      <WarningDialog visible={!playerOpen && playerOpen !== undefined} onRetryClick={checkPlayerOpen} onContinueClick={onContinueClick} />
+      <WarningDialog visible={!playerOpen && playerOpen !== undefined } onRetryClick={checkPlayerOpen} onContinueClick={onContinueClick} />
       <Settings visible={settingsOpen} toggleVisibility={toggleSettingsOpen} bulletType={bulletType} setBulletType={setBulletType}/>
     </div>
   )

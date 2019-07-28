@@ -1,10 +1,10 @@
-.input .results {
-  position: absolute;
-  padding-top: 8px;
-  top: 64px;
+.results {
+  width: 560px;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
-.input .noResult {
+.noResult {
   display: flex;
   height: 56px;
   width: 100%;
@@ -21,23 +21,33 @@
   animation: popup .4s ease-in-out;
 }
 
-.input .result {
+.result {
   display: flex;
-  height: 56px;
+  height: 64px;
   width: 100%;
   flex-direction: row;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 20px;
   box-sizing: border-box;
-  padding: 8px 16px;
+  padding: 16px 24px;
   margin: 8px 0;
   overflow: hidden;
-  animation: popup .4s ease-in-out;
+  opacity: 0;
+}
+
+.result:nth-child(1) {
+  animation: popup .4s ease-in-out forwards;
+}
+.result:nth-child(2) {
+  animation: popup .4s .2s ease-in-out forwards;
+}
+.result:nth-child(3) {
+  animation: popup .4s .4s ease-in-out forwards;
 }
 
 @keyframes popup {
   0% {
-    transform: scale(0.3);
+    transform: translateY(-40px);
     opacity: 0;
   }
 
@@ -45,47 +55,41 @@
     opacity: 0;
   }
 
-  90% {
-    transform: scale(1.01);
-  }
-
   100% {
-    transform: scale(1);
+    transform: translateY(0);
     opacity: 1;
   }
 }
 
-.input .result:last-child {
-  margin: 8px 0 0 0;
-}
-
-.input .result:hover {
+.result:hover {
   background-color: #0000001a;
   cursor: pointer;
 }
 
-.input .result .cover {
-  height: 40px;
-  width: 40px;
-  border-radius: 4px;
+.result .cover {
+  height: 52px;
+  width: 52px;
+  border-radius: 16px;
 }
 
-.input .result .info {
+.result .info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   font-family: 'Cabin', sans-serif;
-  color: #8d8d8d;
+  font-weight: 100;
+  color: #000000;
   border-radius: 16px;
   margin-left: 16px;
   font-size: 14px;
 }
 
-.input .result .info .title, .input .noResult .title {
+.result .info .title, .noResult .title {
+  font-family: 'Cabin', sans-serif;
   font-weight: bold;
   color: #000000;
-  width: 312px;
+  width: 100%;
   margin-bottom: 4px;
-  font-size: 16px;
+  font-size: 18px;
   white-space: nowrap;
 }

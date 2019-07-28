@@ -1,5 +1,5 @@
 import React from 'react'
-import './Result.css'
+import './Results.css'
 
 type ResultProps = {
   title: string

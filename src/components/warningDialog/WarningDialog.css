@@ -10,12 +10,27 @@
   padding: 32px 64px 16px 64px;
   box-sizing: border-box;
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.32);
-  z-index: 12;
+  z-index: 1;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   opacity: 1;
   transition: transform 0.3s ease-in, opacity 0.3s ease-out;
+  transform-style: preserve-3d;
+}
+
+.warningDialog::after {
+  position: absolute;
+  height: 110vh;
+  width: 100vw;
+  background-color: #000000aa;
+  content: '';
+  transform: translateZ(-1px);
+  transition: opacity 0.1s ease-in-out;
+}
+
+.warningDialog.hidden::after {
+  opacity: 0;
 }
 
 .warningDialog.hidden {
@@ -46,7 +61,7 @@
 
 .warningDialog .retry {
   width: 100%;
-  background-color: #1db954;
+  background-color: #ff6c2c;
   color: #ffffff;
   border: none;
   font-family: 'Cabin', sans-serif;
@@ -55,7 +70,6 @@
   box-sizing: border-box;
   padding: 12px 32px;
   border-radius: 24px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.32);
 }
 
 .warningDialog .retry:active {
