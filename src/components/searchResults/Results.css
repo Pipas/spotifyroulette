@@ -1,6 +1,6 @@
 .results {
   width: 560px;
-  padding: 0 24px;
+  padding: 0 88px 0 0;
   box-sizing: border-box;
 }
 
@@ -29,10 +29,10 @@
   align-items: center;
   border-radius: 20px;
   box-sizing: border-box;
-  padding: 16px 24px;
+  padding: 0 24px;
   margin: 8px 0;
-  overflow: hidden;
   opacity: 0;
+  background-color: #0000001a;
 }
 
 .result:nth-child(1) {
@@ -79,17 +79,52 @@
   font-family: 'Cabin', sans-serif;
   font-weight: 100;
   color: #000000;
-  border-radius: 16px;
   margin-left: 16px;
   font-size: 14px;
+  flex: 1;
+  overflow: hidden;
 }
 
 .result .info .title, .noResult .title {
   font-family: 'Cabin', sans-serif;
   font-weight: bold;
   color: #000000;
-  width: 100%;
   margin-bottom: 4px;
   font-size: 18px;
   white-space: nowrap;
+}
+
+@media only screen and (max-width: 576px) {
+  .results {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .result {
+    height: 48px;
+    border-radius: 12px;
+    padding: 0 8px;
+    margin: 8px 0;
+  }
+
+  .result .cover {
+    height: 32px;
+    width: 32px;
+    border-radius: 12px;
+  }
+
+  .result .info {
+    margin-left: 8px;
+  }
+
+  .result .info .title, .noResult .title {
+    font-size: 16px;
+  }
+}
+
+@media (hover: hover) {
+  .result {
+    background-color: transparent;
+  }
 }

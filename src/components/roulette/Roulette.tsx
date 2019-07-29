@@ -75,7 +75,7 @@ const Roulette: React.FC<RouletteProps> = props => {
       key={i}
       src={item !== undefined ? item.image : ''}
       position={i}
-      shot={i === chosenShot && props.state === RouletteState.SHOT}
+      shot={i === chosenShot && props.state === RouletteState.SHOOTING}
       load={i <= loadedShots}
       loading={i === loadedShots && props.state === RouletteState.LOADING}
     />
@@ -136,13 +136,14 @@ const Roulette: React.FC<RouletteProps> = props => {
 
       setTimeout(() => {
         setAngle(randomShot)
-        props.setState(RouletteState.SHOT)
+        props.setState(RouletteState.SHOOTING)
       }, 1700)
 
       props.setState(RouletteState.SPINING)
-    } else if (props.state === RouletteState.SHOT) {
+    } else if (props.state === RouletteState.SHOOTING) {
       setCSSPreviousAngle(chosenShot)
       props.onShoot(chosenShot === 5)
+      props.setState(RouletteState.SHOT)
     } else if (props.state === RouletteState.RESET) {
       resetRoulette()
       props.setState(RouletteState.IDLE)

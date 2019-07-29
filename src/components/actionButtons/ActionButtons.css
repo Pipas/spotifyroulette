@@ -7,10 +7,10 @@
   border-radius: 20px;
   box-sizing: border-box;
   padding: 0 24px;
-  margin: 8px 0;
+  margin: 8px 0 0 0;
   overflow: hidden;
   color: #000000;
-  background-color: transparent;
+  background-color: #0000001a;
   border: none;
   font-family: 'Cabin';
   font-weight: bold;
@@ -30,8 +30,13 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 24px;
+  visibility: hidden;
+  padding: 0 88px 0 0;
   box-sizing: border-box;
+}
+
+.actionButtonContainer.visible {
+  visibility: visible;
 }
 
 .actionButton img {
@@ -48,4 +53,31 @@
 .actionButtonContainer.visible .actionButton {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media only screen and (max-width: 576px) {
+  .actionButtonContainer {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  .actionButton {
+    height: 48px;
+    border-radius: 12px;
+    padding: 0 8px;
+  }
+
+  .actionButton img {
+    height: 40px;
+    width: 40px;
+    margin-right: 16px;
+  }
+}
+
+@media (hover: hover) {
+  .actionButton {
+    background-color: transparent;
+  }
 }

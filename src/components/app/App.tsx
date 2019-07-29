@@ -4,11 +4,11 @@ import './App.css'
 import SearchBar from '../searchBar/SearchBar'
 import Roulette from '../roulette/Roulette'
 import ActionButtons from '../actionButtons/ActionButtons'
-import settingsGear from '../../images/settings.svg'
 import { TrackController, SearchResult, SpotifyItem, AlbumController, ArtistController } from '../../utils/ContextController'
 import WarningDialog from '../warningDialog/WarningDialog'
 import Settings from '../settings/Settings'
 import Results from '../searchResults/Results';
+import Title from '../title/Title';
 
 export enum BulletType {
   Songs, Albums, Artists
@@ -22,6 +22,7 @@ export enum RouletteState {
   READY = 'ready',
   SPIN = 'spin',
   SPINING = 'spining',
+  SHOOTING = 'shooting',
   SHOT = 'shot'
 }
 
@@ -137,9 +138,12 @@ const App: React.FC = () => {
 
   return (
     <div className='app'>
+      <Title />
       <div className='searchContainer'>
         <SearchBar
           onSearch={onSearch}
+          onQueryChange={() => setSearchResult(new SearchResult(false, []))}
+          onSettingsClick={toggleSettingsOpen}
           locked={state !== RouletteState.IDLE}
           tooltip={resolveTooltip()}
         />
@@ -154,7 +158,6 @@ const App: React.FC = () => {
         chooseBullet={true}
         onShoot={onShoot}
       />
-      <img className='settingsButton' src={settingsGear} onClick={toggleSettingsOpen} alt=''></img>
       <WarningDialog visible={!playerOpen && playerOpen !== undefined } onRetryClick={checkPlayerOpen} onContinueClick={onContinueClick} />
       <Settings visible={settingsOpen} toggleVisibility={toggleSettingsOpen} bulletType={bulletType} setBulletType={setBulletType}/>
     </div>

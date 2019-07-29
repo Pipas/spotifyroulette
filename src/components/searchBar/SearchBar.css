@@ -1,10 +1,14 @@
+.buttonContainer {
+  display: flex;
+  width: 560px;
+  margin-top: 64px;
+}
+
 .searchBar {
-  position: relative;
   display: flex;
   flex-direction: row;
+  width: 100%;
   align-items: center;
-  width: 560px;
-  margin: 32px 0 0 0;
   box-sizing: border-box;
   background-color: #ffffff;
   border-radius: 24px;
@@ -64,4 +68,56 @@
   font-size: 16px;
   text-align: center;
   box-sizing: border-box;
+}
+
+.settingsButton {
+  height: 32px;
+  width: 32px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  margin-left: 8px;
+}
+
+.settingsButton:hover {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1300px) {
+  .buttonContainer {
+    margin-top: 16px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .buttonContainer {
+    margin-top: 0;
+    width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+
+  .settingsButton {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    padding: 16px;
+    height: 24px;
+    width: 24px;
+    border-radius: 18px;
+  }
+
+  .searchBar button {
+    margin: 0 8px 0 18px;
+  }
+
+  .searchBar {
+    border-radius: 18px;
+  }
+
+  .searchBar input {
+    height: 56px;
+    font-size: 18px;
+    padding: 8px;
+  }
 }
