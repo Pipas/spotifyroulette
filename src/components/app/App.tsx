@@ -101,7 +101,7 @@ const App: React.FC = () => {
   }, [bulletType])
 
   useEffect(() => {
-    spotify.current.authenticateUser()
+    if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
     setAuthenticated(spotify.current.isAuthenticated())
   }, [authenticated])
 
