@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ae60ece18b8d6d85efdf6f382ce181d0",
+    "revision": "0bdaf64993293463729a6963f03d79ad",
     "url": "/spotifyroulette/index.html"
   },
   {
-    "revision": "029e8c5c34d885b7e4cb",
-    "url": "/spotifyroulette/static/css/main.8420a0e9.chunk.css"
+    "revision": "4776f78e8580577b667d",
+    "url": "/spotifyroulette/static/css/main.36dc6f4a.chunk.css"
   },
   {
-    "revision": "2c63d7600476182ee01b",
-    "url": "/spotifyroulette/static/js/2.1424e3ba.chunk.js"
+    "revision": "f03ccbda7c6ac5ed9fa9",
+    "url": "/spotifyroulette/static/js/2.bc181855.chunk.js"
   },
   {
-    "revision": "029e8c5c34d885b7e4cb",
-    "url": "/spotifyroulette/static/js/main.1f1b7676.chunk.js"
+    "revision": "4776f78e8580577b667d",
+    "url": "/spotifyroulette/static/js/main.0cc1fd90.chunk.js"
   },
   {
     "revision": "2c15f1ee67b321c10704",
@@ -24,8 +24,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spotifyroulette/static/media/close.e85191c6.svg"
   },
   {
-    "revision": "7fee23ab5675b3724d7cf65c408e2f4d",
-    "url": "/spotifyroulette/static/media/logo.7fee23ab.png"
+    "revision": "9d214e5161e9c8cad27380c89e3716af",
+    "url": "/spotifyroulette/static/media/logo.9d214e51.png"
   },
   {
     "revision": "2991144a1cca43dab204b21cf9a0d259",
@@ -36,8 +36,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spotifyroulette/static/media/reshoot.99a86319.svg"
   },
   {
-    "revision": "dc8d006cddcee26a9b6872e475aea533",
-    "url": "/spotifyroulette/static/media/roulette.dc8d006c.svg"
+    "revision": "f61d2f240a51141e5a6e12477bd3b4d1",
+    "url": "/spotifyroulette/static/media/roulette.f61d2f24.svg"
   },
   {
     "revision": "9df51d4e640dadfd9884b1a61c7b5642",
