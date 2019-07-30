@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/spotifyroulette/static/css/main.7306a6ae.chunk.css",
-    "main.js": "/spotifyroulette/static/js/main.7d7888d8.chunk.js",
-    "main.js.map": "/spotifyroulette/static/js/main.7d7888d8.chunk.js.map",
+    "main.js": "/spotifyroulette/static/js/main.6e24fe09.chunk.js",
+    "main.js.map": "/spotifyroulette/static/js/main.6e24fe09.chunk.js.map",
     "runtime~main.js": "/spotifyroulette/static/js/runtime~main.8dc740e8.js",
     "runtime~main.js.map": "/spotifyroulette/static/js/runtime~main.8dc740e8.js.map",
     "static/js/2.1424e3ba.chunk.js": "/spotifyroulette/static/js/2.1424e3ba.chunk.js",
     "static/js/2.1424e3ba.chunk.js.map": "/spotifyroulette/static/js/2.1424e3ba.chunk.js.map",
     "index.html": "/spotifyroulette/index.html",
-    "precache-manifest.41ea52247d23151eda842c719a7a47b4.js": "/spotifyroulette/precache-manifest.41ea52247d23151eda842c719a7a47b4.js",
+    "precache-manifest.3c37b1ed7c1691e3c3ab7a9008db5ac1.js": "/spotifyroulette/precache-manifest.3c37b1ed7c1691e3c3ab7a9008db5ac1.js",
     "service-worker.js": "/spotifyroulette/service-worker.js",
     "static/css/main.7306a6ae.chunk.css.map": "/spotifyroulette/static/css/main.7306a6ae.chunk.css.map",
     "static/media/close.svg": "/spotifyroulette/static/media/close.e85191c6.svg",
