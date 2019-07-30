@@ -1,4 +1,5 @@
 import { SpotifyClient } from './Spoitfy'
+import placeholder from '../images/placeholder.png'
 
 export interface ContextController {
   search(query: string, client: SpotifyClient): Promise<SearchResult>
@@ -26,7 +27,7 @@ export class TrackController implements ContextController {
     return {
         title: track.name,
         author: track.artists[0].name,
-        image: track.album.images[0].url,
+        image: track.album.images.length > 0 ? track.album.images[0].url : placeholder,
         playParameters: {uris: [track.uri]},
         shuffle: false
       }
@@ -43,7 +44,7 @@ export class AlbumController implements ContextController {
     return {
         title: album.name,
         author: album.artists[0].name,
-        image: album.images.length > 0 ? album.images[0].url : '',
+        image: album.images.length > 0 ? album.images[0].url : placeholder,
         playParameters: { context_uri: album.uri },
         shuffle: false
       }
@@ -60,7 +61,7 @@ export class ArtistController implements ContextController {
     return {
         title: artist.name,
         author: 'Artist',
-        image: artist.images.length > 0 ? artist.images[0].url : '',
+        image: artist.images.length > 0 ? artist.images[0].url : placeholder,
         playParameters: { context_uri: artist.uri },
         shuffle: true
       }
