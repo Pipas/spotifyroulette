@@ -4,6 +4,7 @@ import {
   SearchResult,
   SpotifyItem
 } from './ContextController'
+import placeholder from '../images/placeholder.png'
 
 export type SpotifyClient = SpotifyWebApi.SpotifyWebApiJs
 
@@ -28,7 +29,11 @@ export class Spotify {
       .split('&')[0]
       .split('=')[1]
     window.location.hash = ''
-    window.history.pushState("", document.title, window.location.pathname + window.location.search);
+    window.history.pushState(
+      '',
+      document.title,
+      window.location.pathname + window.location.search
+    )
 
     const authEndpoint = 'https://accounts.spotify.com/authorize'
     const clientId = '41e10dc3f3594667b190b3681fdee8ca'
@@ -60,7 +65,9 @@ export class Spotify {
   play(item: SpotifyItem | undefined) {
     if (this.deviceId !== '' && item !== undefined) {
       this.client.setShuffle(item.shuffle)
-      this.client.play({ device_id: this.deviceId, ...item.playParameters }).catch()
+      this.client
+        .play({ device_id: this.deviceId, ...item.playParameters })
+        .catch()
     }
   }
 
@@ -73,6 +80,39 @@ export class Spotify {
         return true
       } else return false
     }
+  }
+
+  private searchRandomTrack(): Promise<SpotifyApi.SearchResponse> {
+    const vowels = 'aeiou'
+    const characters = 'abcdefghijklmnopqrstuvwxyz '
+
+    const randomString =
+      '' +
+      vowels[Math.floor(Math.random() * vowels.length)] +
+      characters[Math.floor(Math.random() * characters.length)]
+
+    return this.client.search(randomString, ['track'], {
+      offset: Math.floor(Math.random() * 999),
+      limit: 50
+    })
+  }
+
+  async getRandomTrack(): Promise<SpotifyItem> {
+    const randomSearch = await this.searchRandomTrack()
+    if (randomSearch.tracks && randomSearch.tracks.items.length > 0) {
+      const track = randomSearch.tracks.items[Math.floor(Math.random() * 50)]
+      const trackItem = {
+        title: track.name,
+        author: track.artists[0].name,
+        image:
+          track.album.images.length > 0
+            ? track.album.images[0].url
+            : placeholder,
+        playParameters: { uris: [track.uri] },
+        shuffle: false
+      }
+      return trackItem
+    } else return this.getRandomTrack()
   }
 
   isAuthenticated() {

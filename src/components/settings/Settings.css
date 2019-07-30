@@ -68,6 +68,17 @@ button:focus {
   cursor: pointer;
 }
 
+.settingsDialog .row {
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.settingsDialog .row h3 {
+  margin-right: 16px;
+}
+
 @media only screen and (max-width: 368px) {
   .settingsDialog {
     width: calc(100vw - 16px);
