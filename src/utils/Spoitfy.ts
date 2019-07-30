@@ -34,7 +34,7 @@ export class Spotify {
     const clientId = '41e10dc3f3594667b190b3681fdee8ca'
     const redirectUri =
       process.env.NODE_ENV === 'production'
-        ? 'https://paulocorreia.me/spotifyroulette'
+        ? 'https://paulocorreia.me/spotifyroulette/'
         : 'http://localhost:3000/'
     const scopes = [
       'user-top-read',
