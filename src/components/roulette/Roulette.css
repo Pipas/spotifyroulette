@@ -9,7 +9,6 @@
   height: 100vh;
   width: 100vh;
   background-color: var(--color);
-  transition: transform .5s cubic-bezier(0.39,-0.01, 0.58, 0.97);
 }
 
 .roulette.loading {
