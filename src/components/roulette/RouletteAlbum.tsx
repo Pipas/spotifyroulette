@@ -13,7 +13,7 @@ type RouletteAlbumProps = {
 const useLoadSound = (play: boolean) => {
   const loadSound = useRef<Howl>(
     new Howl({
-      src: '/audio/load.mp3'
+      src: '/spotifyroulette/audio/load.mp3'
     })
   )
 
