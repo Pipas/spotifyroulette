@@ -25,7 +25,7 @@ const useLoadSound = (play: boolean) => {
 const useShootSound = (play: boolean, position: number) => {
   const shotSound = useRef<Howl>(
     new Howl({
-      src: position === 5 ? '/audio/shot.mp3' : '/audio/blank.mp3'
+      src: position === 5 ? '/spotifyroulette/audio/shot.mp3' : '/spotifyroulette/audio/blank.mp3'
     })
   )
 

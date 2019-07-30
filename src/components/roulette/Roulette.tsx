@@ -24,7 +24,7 @@ type RouletteProps = {
 const useSpinSound = (play: boolean) => {
   const loadSound = useRef<Howl>(
     new Howl({
-      src: '/audio/spin.mp3'
+      src: '/spotifyroulette/audio/spin.mp3'
     })
   )
 
