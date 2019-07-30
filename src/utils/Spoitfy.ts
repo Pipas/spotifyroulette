@@ -28,6 +28,7 @@ export class Spotify {
       .split('&')[0]
       .split('=')[1]
     window.location.hash = ''
+    window.history.pushState("", document.title, window.location.pathname + window.location.search);
 
     const authEndpoint = 'https://accounts.spotify.com/authorize'
     const clientId = '41e10dc3f3594667b190b3681fdee8ca'
