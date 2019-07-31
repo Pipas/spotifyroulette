@@ -9,6 +9,7 @@ type RouletteAlbumProps = {
   shot: boolean
   load: boolean
   loading: boolean
+  isBullet: boolean
 }
 
 const useLoadSound = (play: boolean) => {
@@ -23,10 +24,10 @@ const useLoadSound = (play: boolean) => {
   }, [play])
 }
 
-const useShootSound = (play: boolean, position: number) => {
+const useShootSound = (play: boolean, isBullet: boolean) => {
   const shotSound = useRef<Howl>(
     new Howl({
-      src: position === 5 ? root + 'audio/shot.mp3' : root + 'audio/blank.mp3'
+      src: isBullet ? root + 'audio/shot.mp3' : root + 'audio/blank.mp3'
     })
   )
 
@@ -37,7 +38,7 @@ const useShootSound = (play: boolean, position: number) => {
 
 const RouletteAlbum: React.FC<RouletteAlbumProps> = props => {
   useLoadSound(props.loading)
-  useShootSound(props.shot, props.position)
+  useShootSound(props.shot, props.isBullet)
 
   return (
     <div

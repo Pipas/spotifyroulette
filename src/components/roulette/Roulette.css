@@ -24,6 +24,10 @@
   animation: spin 1.2s cubic-bezier(0.39,-0.01, 0.58, 0.97) forwards;
 }
 
+.roulette.resetting {
+  animation: reset 0.5s cubic-bezier(0.39,-0.01, 0.58, 0.97) forwards;
+}
+
 .roulette img {
   height: 100%;
   width: 100%;
@@ -126,5 +130,14 @@
   }
   100% {
     transform: rotate(calc(360deg * 5 + 60deg * var(--next)));
+  }
+}
+
+@keyframes reset {
+  0% {
+    transform: rotate(calc(360deg * 3 + 60deg * var(--next)));
+  }
+  100% {
+    transform: rotate(0);
   }
 }

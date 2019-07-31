@@ -10,6 +10,10 @@
   outline: none;
   user-select: none;
 }
+.cmn-toggle:disabled + label {
+  cursor: default;
+}
+
 input.cmn-toggle-round + label {
   padding: 2px;
   width: 56px;
@@ -46,4 +50,12 @@ input.cmn-toggle-round:checked + label:before {
 }
 input.cmn-toggle-round:checked + label:after {
   margin-left: 25px;
+}
+
+input.cmn-toggle-round:disabled + label:before {
+  background-color: #f6f6f4;
+}
+
+input.cmn-toggle-round:disabled + label:after {
+  background-color: #f6f6f4;
 }

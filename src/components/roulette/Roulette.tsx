@@ -3,23 +3,18 @@ import { Howl } from 'howler'
 import './Roulette.css'
 import roulette from '../../images/roulette.svg'
 import RouletteAlbum from './RouletteAlbum'
-import { RouletteState } from '../app/App'
+import { RouletteState, LoadState } from '../../types/RouletteTypes'
 import { SpotifyItem } from '../../utils/ContextController'
 import { root } from '../../utils/FileRoot'
 
-enum LoadState {
-  EMPTY = 'empty',
-  HALF = 'half',
-  FULL = 'full'
-}
-
 type RouletteProps = {
-  blank: SpotifyItem | undefined
+  blanks: SpotifyItem[]
   bullet: SpotifyItem | undefined
   state: RouletteState
   setState: React.Dispatch<React.SetStateAction<RouletteState>>
   randomBullet: boolean
-  onShoot: (isBullet: boolean) => void
+  dangerMode: boolean
+  onShoot: (position: number) => void
 }
 
 const useSpinSound = (play: boolean) => {
@@ -68,23 +63,20 @@ const Roulette: React.FC<RouletteProps> = props => {
 
   useSpinSound(props.state === RouletteState.SPINING)
 
-  const albums = [
-    props.blank,
-    props.blank,
-    props.blank,
-    props.blank,
-    props.blank,
-    props.bullet
-  ].map((item, i) => (
-    <RouletteAlbum
-      key={i}
-      src={item !== undefined ? item.image : ''}
-      position={i}
-      shot={i === chosenShot && props.state === RouletteState.SHOOTING}
-      load={i <= loadedShots}
-      loading={i === loadedShots && props.state === RouletteState.LOADING}
-    />
-  ))
+  const albums =
+    props.blanks.length > 0
+      ? [...props.blanks, props.bullet].map((item, i) => (
+          <RouletteAlbum
+            key={i}
+            src={item !== undefined ? item.image : ''}
+            position={i}
+            shot={i === chosenShot && props.state === RouletteState.SHOOTING}
+            load={i <= loadedShots}
+            loading={i === loadedShots && props.state === RouletteState.LOADING}
+            isBullet={i === 5 ? !props.dangerMode : props.dangerMode}
+          />
+        ))
+      : null
 
   // Loads shots and calls callback after waitTime
   const loadRoulette = (callback: () => void, waitTime: number): void => {
@@ -150,11 +142,16 @@ const Roulette: React.FC<RouletteProps> = props => {
       props.setState(RouletteState.SPINING)
     } else if (props.state === RouletteState.SHOOTING) {
       setCSSPreviousAngle(chosenShot)
-      props.onShoot(chosenShot === 5)
+      props.onShoot(chosenShot)
       props.setState(RouletteState.SHOT)
     } else if (props.state === RouletteState.RESET) {
       resetRoulette()
-      props.setState(RouletteState.IDLE)
+
+      setTimeout(() => {
+        props.setState(RouletteState.IDLE)
+      }, 500)
+
+      props.setState(RouletteState.RESETTING)
     }
   })
 

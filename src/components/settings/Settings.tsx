@@ -1,28 +1,43 @@
 import React from 'react'
 import './Settings.css'
 import close from '../../images/close.svg'
-import SettingChips from '../settingChips/SettingChips';
-import SettingToggle from '../settingToggle/SettingToggle';
+import SettingChips from '../settingChips/SettingChips'
+import SettingToggle from '../settingToggle/SettingToggle'
+import { SettingOptions } from '../../types/SettingTypes'
 
 type SettingsProps = {
   visible: boolean
-  bulletType: number
-  randomBullet: boolean
-  setBulletType: (bullet: number) => void
-  setrandomBullet: (choose: boolean) => void
+  settings: SettingOptions
+  setSettings: React.Dispatch<React.SetStateAction<SettingOptions>>
   toggleVisibility: () => void
 }
 
 const WarningDialog: React.FC<SettingsProps> = props => {
+  const onSelectBulletType = (option: number) => {
+    props.setSettings((settings: SettingOptions) => ({...settings, bulletType: option}))
+  }
+  
+  const onToggleRandomBullet = () => {
+    props.setSettings((settings: SettingOptions) => ({...settings, randomBullet: !settings.randomBullet}))
+  }
+
+  const onToggleDangerMode = () => {
+    props.setSettings((settings: SettingOptions) => ({...settings, dangerMode: !settings.dangerMode}))
+  }
+
   return (
     <div className={`settingsContainer ${props.visible ? 'visible' : 'hidden'}`} onClick={props.toggleVisibility}>
       <div className='settingsDialog' onClick={e => e.stopPropagation()}>
         <h2>Settings</h2>
         <h3>Bullet Type</h3>
-        <SettingChips selected={props.bulletType} chips={['Songs', 'Albuns', 'Artists']} onSelect={props.setBulletType}/>
+        <SettingChips selected={props.settings.bulletType} chips={['Songs', 'Albuns', 'Artists']} onSelect={onSelectBulletType}/>
         <div className='row'>
-          <h3>Random Bullet</h3>
-          <SettingToggle value={props.randomBullet} onToggle={() => props.setrandomBullet(!props.randomBullet)} />
+          <h3 className={props.settings.dangerMode ? 'disabled' : ''}>Random Bullet</h3>
+          <SettingToggle value={props.settings.randomBullet} onToggle={onToggleRandomBullet} disabled={props.settings.dangerMode} />
+        </div>
+        <div className='row'>
+          <h3>Danger Mode</h3>
+          <SettingToggle value={props.settings.dangerMode} onToggle={onToggleDangerMode} disabled={false}/>
         </div>
         <img className='close' src={close} onClick={props.toggleVisibility} alt=''></img>
       </div>
