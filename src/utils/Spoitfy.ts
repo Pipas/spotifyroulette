@@ -64,7 +64,7 @@ export class Spotify {
 
   play(item: SpotifyItem | undefined) {
     if (this.deviceId !== '' && item !== undefined) {
-      this.client.setShuffle(item.shuffle)
+      this.client.setShuffle(item.shuffle).catch()
       this.client
         .play({ device_id: this.deviceId, ...item.playParameters })
         .catch()

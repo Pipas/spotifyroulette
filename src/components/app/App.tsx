@@ -39,17 +39,18 @@ const usePlayerOpen = (
   const checkPlayerOpen = useCallback(
     () =>
       spotify.hasPlayerOpen().then(isOpen => {
+        console.log('checking player open')
         setPlayerOpen(isOpen)
+        if(isOpen) setState(RouletteState.SPIN)
       }),
-    [spotify]
+    [spotify, setState]
   )
 
   useEffect(() => {
     if (state === RouletteState.READY) {
-      if (!playerOpen) checkPlayerOpen()
-      else setState(RouletteState.SPIN)
+      checkPlayerOpen()
     }
-  }, [playerOpen, checkPlayerOpen, state, setState])
+  }, [checkPlayerOpen, state])
 
   return [playerOpen, checkPlayerOpen, setPlayerOpen]
 }
@@ -206,7 +207,7 @@ const App: React.FC = () => {
           <Results searchResult={searchResult} onResultClick={onResultClick} />
           <ActionButtons
             visible={state === RouletteState.SHOT}
-            onRerollClick={() => setState(RouletteState.SPIN)}
+            onRerollClick={() => setState(RouletteState.READY)}
             onResetClick={resetRoulette}
           />
         </div>
