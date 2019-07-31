@@ -17,7 +17,7 @@ type RouletteProps = {
   bullet: SpotifyItem | undefined
   state: RouletteState
   setState: React.Dispatch<React.SetStateAction<RouletteState>>
-  chooseBullet: boolean
+  randomBullet: boolean
   onShoot: (isBullet: boolean) => void
 }
 
@@ -33,19 +33,19 @@ const useSpinSound = (play: boolean) => {
   }, [play])
 }
 
-const useLoadShots = (chooseBullet: boolean): [number, () => void, () => void] => {
+const useLoadShots = (randomBullet: boolean): [number, () => void, () => void] => {
   const [loadedShots, setLoadedShots] = useState(-1)
 
   useEffect(() => {
     setTimeout(() => {
-      if (chooseBullet) {
+      if (!randomBullet) {
         if (loadedShots >= 0 && loadedShots < 4) incrementShot()
         if (loadedShots === 5) incrementShot()
       } else {
         if (loadedShots >= 0 && loadedShots < 6) incrementShot()
       }
     }, 1500)
-  }, [loadedShots, chooseBullet])
+  }, [loadedShots, randomBullet])
 
   const incrementShot = (): void =>
     setLoadedShots(loadedShots => loadedShots + 1)
@@ -59,7 +59,7 @@ const Roulette: React.FC<RouletteProps> = props => {
   const [chosenShot, setChosenShot] = useState(-1)
   const [angle, setAngle] = useState(0)
   const [loadState, setLoadState] = useState(LoadState.EMPTY)
-  const [loadedShots, loadShots, resetLoadShots] = useLoadShots(props.chooseBullet)
+  const [loadedShots, loadShots, resetLoadShots] = useLoadShots(props.randomBullet)
 
   useSpinSound(props.state === RouletteState.SPINING)
 
@@ -105,7 +105,7 @@ const Roulette: React.FC<RouletteProps> = props => {
 
   useEffect(() => {
     if (props.state === RouletteState.LOAD) {
-      if (props.chooseBullet) {
+      if (!props.randomBullet) {
         if (loadState === LoadState.EMPTY) {
           loadRoulette(() => {
             setLoadState(LoadState.HALF)

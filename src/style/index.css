@@ -142,9 +142,14 @@ table {
   border-spacing: 0;
 }
 
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: #eba917;
 }
 

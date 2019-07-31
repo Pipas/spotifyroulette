@@ -75,7 +75,7 @@ const App: React.FC = () => {
   const [bullet, setBullet] = useState<SpotifyItem>()
   const [blank, setBlank] = useState<SpotifyItem>()
   const [bulletType, setBulletType] = useState(BulletType.Songs)
-  const [chooseBullet, setChooseBullet] = useState(false)
+  const [randomBullet, setrandomBullet] = useState(true)
   const [authenticated, setAuthenticated] = useState(false)
   const [searchResult, setSearchResult] = useState<SearchResult>(
     new SearchResult(false, [])
@@ -107,18 +107,18 @@ const App: React.FC = () => {
   }, [authenticated])
 
   const onResultClick = (position: number): void => {
-    if(chooseBullet) {
+    if(randomBullet) {
+      setBlank(searchResult.results[position])
+      spotify.current.getRandomTrack().then(track => {
+        setBullet(track)
+      })
+    }
+    else {
       if (blank === undefined) {
         setBlank(searchResult.results[position])
       } else {
         setBullet(searchResult.results[position])
       }
-    }
-    else {
-      setBlank(searchResult.results[position])
-      spotify.current.getRandomTrack().then(track => {
-        setBullet(track)
-      })
     }
 
     setSearchResult(new SearchResult(false, []))
@@ -187,7 +187,7 @@ const App: React.FC = () => {
           bullet={bullet}
           state={state}
           setState={setState}
-          chooseBullet={chooseBullet}
+          randomBullet={randomBullet}
           onShoot={onShoot}
         />
         <WarningDialog
@@ -200,8 +200,8 @@ const App: React.FC = () => {
           toggleVisibility={toggleSettingsOpen}
           bulletType={bulletType}
           setBulletType={setBulletType}
-          chooseBullet={chooseBullet}
-          setChooseBullet={setChooseBullet}
+          randomBullet={randomBullet}
+          setrandomBullet={setrandomBullet}
         />
       </div>
     )
