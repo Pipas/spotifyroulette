@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import './Roulette.css'
 import { Howl } from 'howler'
+import { root } from '../../utils/FileRoot'
 
 type RouletteAlbumProps = {
   position: number
@@ -13,7 +14,7 @@ type RouletteAlbumProps = {
 const useLoadSound = (play: boolean) => {
   const loadSound = useRef<Howl>(
     new Howl({
-      src: '/spotifyroulette/audio/load.mp3'
+      src: root + 'audio/load.mp3'
     })
   )
 
@@ -25,7 +26,7 @@ const useLoadSound = (play: boolean) => {
 const useShootSound = (play: boolean, position: number) => {
   const shotSound = useRef<Howl>(
     new Howl({
-      src: position === 5 ? '/spotifyroulette/audio/shot.mp3' : '/spotifyroulette/audio/blank.mp3'
+      src: position === 5 ? root + 'audio/shot.mp3' : root + 'audio/blank.mp3'
     })
   )
 

@@ -4,7 +4,8 @@ import './Roulette.css'
 import roulette from '../../images/roulette.svg'
 import RouletteAlbum from './RouletteAlbum'
 import { RouletteState } from '../app/App'
-import { SpotifyItem } from '../../utils/ContextController';
+import { SpotifyItem } from '../../utils/ContextController'
+import { root } from '../../utils/FileRoot'
 
 enum LoadState {
   EMPTY = 'empty',
@@ -24,7 +25,7 @@ type RouletteProps = {
 const useSpinSound = (play: boolean) => {
   const loadSound = useRef<Howl>(
     new Howl({
-      src: '/spotifyroulette/audio/spin.mp3'
+      src: root + 'audio/spin.mp3'
     })
   )
 
@@ -33,7 +34,9 @@ const useSpinSound = (play: boolean) => {
   }, [play])
 }
 
-const useLoadShots = (randomBullet: boolean): [number, () => void, () => void] => {
+const useLoadShots = (
+  randomBullet: boolean
+): [number, () => void, () => void] => {
   const [loadedShots, setLoadedShots] = useState(-1)
 
   useEffect(() => {
@@ -59,7 +62,9 @@ const Roulette: React.FC<RouletteProps> = props => {
   const [chosenShot, setChosenShot] = useState(-1)
   const [angle, setAngle] = useState(0)
   const [loadState, setLoadState] = useState(LoadState.EMPTY)
-  const [loadedShots, loadShots, resetLoadShots] = useLoadShots(props.randomBullet)
+  const [loadedShots, loadShots, resetLoadShots] = useLoadShots(
+    props.randomBullet
+  )
 
   useSpinSound(props.state === RouletteState.SPINING)
 
@@ -131,7 +136,10 @@ const Roulette: React.FC<RouletteProps> = props => {
           setCSSPreviousAngle(5)
         }, 8300)
       }
-    } else if (props.state === RouletteState.SPIN && loadState === LoadState.FULL) {
+    } else if (
+      props.state === RouletteState.SPIN &&
+      loadState === LoadState.FULL
+    ) {
       const randomShot = randomChosenShot()
 
       setTimeout(() => {
