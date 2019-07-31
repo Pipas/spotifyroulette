@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { useCookies } from 'react-cookie'
 import { Spotify } from '../../utils/Spoitfy'
 import './App.css'
 import SearchBar from '../searchBar/SearchBar'
@@ -53,16 +54,32 @@ const usePlayerOpen = (
   return [playerOpen, checkPlayerOpen, setPlayerOpen]
 }
 
+const useSettings = (): [
+  SettingOptions,
+  React.Dispatch<React.SetStateAction<SettingOptions>>,
+  (name: string, value: any | undefined) => void
+] => {
+  const [cookieSettings, setCookieSettings] = useCookies(['settings'])
+
+  const defaultSettings = {
+    bulletType: BulletType.Songs,
+    randomBullet: true,
+    dangerMode: false
+  }
+
+  const [settings, setSettings] = useState<SettingOptions>(
+    cookieSettings['settings'] ? cookieSettings['settings'] : defaultSettings
+  )
+
+  return [settings, setSettings, setCookieSettings]
+}
+
 const App: React.FC = () => {
   const spotify = useRef(new Spotify(new TrackController()))
   const [state, setState] = useState(RouletteState.IDLE)
   const [bullet, setBullet] = useState<SpotifyItem>()
   const [blanks, setBlanks] = useState<SpotifyItem[]>([])
-  const [settings, setSettings] = useState<SettingOptions>({
-    bulletType: BulletType.Songs,
-    randomBullet: true,
-    dangerMode: false
-  })
+  const [settings, setSettings, setCookieSettings] = useSettings()
   const [authenticated, setAuthenticated] = useState(false)
   const [searchResult, setSearchResult] = useState<SearchResult>(
     new SearchResult(false, [])
@@ -86,29 +103,37 @@ const App: React.FC = () => {
         spotify.current.setController(new ArtistController())
         break
     }
-  }, [settings])
+
+    setCookieSettings('settings', settings)
+  }, [settings, setCookieSettings])
 
   useEffect(() => {
     if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
     setAuthenticated(spotify.current.isAuthenticated())
   }, [authenticated])
 
-  const createBlanksArray = (blank: SpotifyItem) => [blank, blank, blank, blank, blank]
+  const createBlanksArray = (blank: SpotifyItem) => [
+    blank,
+    blank,
+    blank,
+    blank,
+    blank
+  ]
 
   const onResultClick = (position: number): void => {
     if (settings.dangerMode) {
-        setBullet(searchResult.results[position])
-        setState(RouletteState.WAITING)
-        Promise.all([
-          spotify.current.getRandomTrack(),
-          spotify.current.getRandomTrack(),
-          spotify.current.getRandomTrack(),
-          spotify.current.getRandomTrack(),
-          spotify.current.getRandomTrack()
-        ]).then(tracks => {
-          setBlanks(tracks)
-          setState(RouletteState.LOAD)
-        })
+      setBullet(searchResult.results[position])
+      setState(RouletteState.WAITING)
+      Promise.all([
+        spotify.current.getRandomTrack(),
+        spotify.current.getRandomTrack(),
+        spotify.current.getRandomTrack(),
+        spotify.current.getRandomTrack(),
+        spotify.current.getRandomTrack()
+      ]).then(tracks => {
+        setBlanks(tracks)
+        setState(RouletteState.LOAD)
+      })
     } else {
       if (settings.randomBullet) {
         setBlanks(createBlanksArray(searchResult.results[position]))
