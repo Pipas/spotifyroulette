@@ -84,6 +84,20 @@ button:focus {
   margin-right: 16px;
 }
 
+.settingsDialog .github {
+  margin-top: 32px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-family: 'Cabin', sans-serif;
+  color: #696969;
+}
+
+.settingsDialog .github p {
+  font-size: 16px;
+  margin-right: 16px;
+}
+
 @media only screen and (max-width: 368px) {
   .settingsDialog {
     width: calc(100vw - 16px);
