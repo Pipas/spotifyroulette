@@ -4,6 +4,7 @@ import close from '../../images/close.svg'
 import SettingChips from '../settingChips/SettingChips'
 import SettingToggle from '../settingToggle/SettingToggle'
 import { SettingOptions } from '../../types/SettingTypes'
+import GitHubButton from 'react-github-btn'
 
 type SettingsProps = {
   visible: boolean
@@ -67,14 +68,13 @@ const WarningDialog: React.FC<SettingsProps> = props => {
         </div>
         <div className='github'>
           <p>Source on GitHub</p>
-          <a
-          className='github-button'
-          href='https://github.com/pipas/spotifyroulette'
-          data-icon='octicon-star'
-          aria-label='Star pipas/spotifyroulette on GitHub'
-        >
-          Star
-        </a>
+          <GitHubButton
+            href='https://github.com/pipas/spotifyroulette'
+            data-icon='octicon-star'
+            aria-label='Star pipas/spotifyroulette on GitHub'
+          >
+            Star
+          </GitHubButton>
         </div>
         <img
           className='close'
