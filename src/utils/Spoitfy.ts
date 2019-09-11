@@ -42,9 +42,9 @@ export class Spotify {
         ? 'https://paulocorreia.me/spotifyroulette/'
         : 'http://localhost:3000/'
     const scopes = [
-      'user-top-read',
       'user-modify-playback-state',
-      'user-read-playback-state'
+      'user-read-playback-state',
+      'user-read-private'
     ]
 
     // If there is no token, redirect to Spotify authorization
@@ -118,4 +118,11 @@ export class Spotify {
   isAuthenticated() {
     return this.auth
   }
+
+  async isPremiumAccount(): Promise<boolean> {
+    const userProfile = await this.client.getMe()
+
+    return userProfile.product === 'premium'
+  }
+
 }

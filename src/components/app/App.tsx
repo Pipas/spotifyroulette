@@ -18,6 +18,7 @@ import Results from '../searchResults/Results'
 import Title from '../title/Title'
 import { RouletteState } from '../../types/RouletteTypes'
 import { BulletType, SettingOptions } from '../../types/SettingTypes'
+import PremiumWarning from '../premiumWarning/PremiumWarning'
 
 const useSettingsOpen = (): [boolean, () => void] => {
   const [settingsOpen, setSettingsOpen] = useState(false)
@@ -39,7 +40,6 @@ const usePlayerOpen = (
   const checkPlayerOpen = useCallback(
     () =>
       spotify.hasPlayerOpen().then(isOpen => {
-        console.log('checking player open')
         setPlayerOpen(isOpen)
         if(isOpen) setState(RouletteState.SPIN)
       }),
@@ -73,6 +73,16 @@ const useSettings = (): [
   )
 
   return [settings, setSettings, setCookieSettings]
+}
+
+const useIsPremium = (spotify: Spotify) : boolean => {
+  const [isPremium, setIsPremium] = useState(true)
+
+  useEffect(() => {
+    spotify.isPremiumAccount().then(state => setIsPremium(state))
+  }, [spotify])
+
+  return isPremium
 }
 
 const App: React.FC = () => {
@@ -112,6 +122,8 @@ const App: React.FC = () => {
     if (!spotify.current.isAuthenticated()) spotify.current.authenticateUser()
     setAuthenticated(spotify.current.isAuthenticated())
   }, [authenticated])
+
+  const isPremium = useIsPremium(spotify.current)
 
   const createBlanksArray = (blank: SpotifyItem) => [
     blank,
@@ -158,7 +170,8 @@ const App: React.FC = () => {
   }
 
   const onShoot = (position: number): void => {
-    spotify.current.play([...blanks, bullet][position])
+    if(isPremium)
+      spotify.current.play([...blanks, bullet][position])
   }
 
   const onContinueClick = () => {
@@ -220,6 +233,7 @@ const App: React.FC = () => {
           dangerMode={settings.dangerMode}
           onShoot={onShoot}
         />
+        <PremiumWarning visible={!isPremium} />
         <WarningDialog
           visible={!playerOpen && playerOpen !== undefined}
           onRetryClick={checkPlayerOpen}
