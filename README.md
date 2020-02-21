@@ -2,7 +2,7 @@
 
 Spotify Roulette is a browser application that allows you to play a simple game of Russian Roulette with spotify songs.
 
-You play here: [https://paulocorreia.me/spotifyroulette](https://paulocorreia.me/spotifyroulette).
+You can play here: [https://paulocorreia.me/spotifyroulette](https://paulocorreia.me/spotifyroulette).
 
 
 ## Development
